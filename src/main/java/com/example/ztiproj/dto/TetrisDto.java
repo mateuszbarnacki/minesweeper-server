@@ -8,5 +8,6 @@ import lombok.Value;
 @Builder
 @NonNull
 public class TetrisDto {
+    String userName;
     Long score;
 }

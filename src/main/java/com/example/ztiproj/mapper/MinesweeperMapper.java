@@ -6,13 +6,13 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 public class MinesweeperMapper {
-
     public MinesweeperEntity map(MinesweeperDto dto) {
-        return new MinesweeperEntity(dto.getTime());
+        return new MinesweeperEntity(dto.getUserName(), dto.getTime());
     }
 
     public MinesweeperDto map(MinesweeperEntity entity) {
         return MinesweeperDto.builder()
+                .userName(entity.getUserName())
                 .time(entity.getTime())
                 .build();
     }

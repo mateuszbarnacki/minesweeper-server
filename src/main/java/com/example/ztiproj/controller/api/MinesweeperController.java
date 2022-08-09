@@ -1,46 +1,54 @@
 package com.example.ztiproj.controller.api;
 
 import com.example.ztiproj.dto.MinesweeperDto;
-import jakarta.enterprise.context.RequestScoped;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.DELETE;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.QueryParam;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
-import org.eclipse.microprofile.openapi.annotations.Operation;
-import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
-import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-@Path("/minesweeper")
-@RequestScoped
+@RestController
+@RequestMapping("/minesweeper")
 public interface MinesweeperController {
 
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    @Operation(summary = "Get overall ranking", description = "Method returns the ranking of top 10 results.")
-    Response getRanking();
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Get overall ranking", notes = "Method returns the ranking of top 10 results.")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "All results returned successfully"),
+            @ApiResponse(code = 404, message = "User not found"),
+            @ApiResponse(code = 500, message = "Server crashed")})
+    ResponseEntity<MinesweeperDto> getRanking();
 
-    @GET
-    @Path("/user-results")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Operation(summary = "Get ranking for user", description = "Method returns the top results for user" +
+    @GetMapping(path = "/user-results", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Get ranking for user", notes = "Method returns the top results for user" +
             " specified in username parameter. Ranking contains up to 10 results.")
-    Response getUserRanking(@QueryParam("username") String username);
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "All user results returned successfully"),
+            @ApiResponse(code = 404, message = "User not found"),
+            @ApiResponse(code = 500, message = "Server crashed")})
+    ResponseEntity<MinesweeperDto> getUserRanking(@RequestParam("username") String username);
 
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Operation(summary = "Add result", description = "Method add the result to database.")
-    Response addResult(@RequestBody(required = true) MinesweeperDto dto);
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Add result", notes = "Method add the result to database.")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "All results returned"),
+            @ApiResponse(code = 404, message = "Result not found"),
+            @ApiResponse(code = 500, message = "Server crashed")})
+    ResponseEntity<MinesweeperDto> addResult(@RequestBody MinesweeperDto dto);
 
-    @DELETE
-    @Operation(hidden = true, summary = "Delete result", description = "Method deletes all user results.")
-    @APIResponse(responseCode = "200", description = "All user results deleted successfully")
-    @APIResponse(responseCode = "404", description = "User not found")
-    @APIResponse(responseCode = "500", description = "Server crashed")
-    void deleteResult(@QueryParam("username") String username);
+    @DeleteMapping
+    @ApiOperation(hidden = true, value = "Delete result", notes = "Method deletes all user results.")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "All user results deleted successfully"),
+            @ApiResponse(code = 404, message = "User not found"),
+            @ApiResponse(code = 500, message = "Server crashed")})
+    void deleteAllUserResults(@RequestParam("username") String username);
 
 }

@@ -1,8 +1,13 @@
 package com.example.ztiproj.common;
 
 public final class Labels {
-    public static final String USER_ENTITY = "User";
-    public static final String MINESWEEPER_ENTITY = "Minesweeper";
-    public static final String TETRIS_ENTITY = "Tetris";
-    public static final String SNAKE_ENTITY = "Snake";
+    public static final String USER_ENTITY = "user";
+    public static final String MINESWEEPER_ENTITY = "minesweeper";
+    public static final String TETRIS_ENTITY = "tetris";
+    public static final String SNAKE_ENTITY = "snake";
+
+    public static final String USER_ENTITY_INDEX_NAME = "user_user_index";
+    public static final String MINESWEEPER_ENTITY_INDEX_NAME = "minesweeper_user_index";
+    public static final String TETRIS_ENTITY_INDEX_NAME = "tetris_user_index";
+    public static final String SNAKE_ENTITY_INDEX_NAME = "snake_user_index";
 }

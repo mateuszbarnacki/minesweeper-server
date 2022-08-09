@@ -6,13 +6,13 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 public class TetrisMapper {
-
     public TetrisEntity map(TetrisDto dto) {
-        return new TetrisEntity(dto.getScore());
+        return new TetrisEntity(dto.getUserName(), dto.getScore());
     }
 
     public TetrisDto map(TetrisEntity entity) {
         return TetrisDto.builder()
+                .userName(entity.getUserName())
                 .score(entity.getScore())
                 .build();
     }

@@ -1,27 +1,23 @@
 package com.example.ztiproj.model;
 
 import com.example.ztiproj.common.Labels;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Set;
-
-@Entity(name = Labels.TETRIS_ENTITY)
+@Document(value = Labels.TETRIS_ENTITY)
 public class TetrisEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Indexed(name = Labels.TETRIS_ENTITY_INDEX_NAME, background = true)
+    private String userName;
     private Long score;
-    @ManyToMany(mappedBy = "tetrisEntities")
-    private Set<UserEntity> userEntities;
 
     public TetrisEntity() {
     }
 
-    public TetrisEntity(Long score) {
+    public TetrisEntity(String userName, Long score) {
+        this.userName = userName;
         this.score = score;
     }
 
@@ -33,19 +29,19 @@ public class TetrisEntity {
         this.id = id;
     }
 
+    public String getUserName() {
+        return this.userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     public Long getScore() {
         return this.score;
     }
 
     public void setScore(Long score) {
         this.score = score;
-    }
-
-    public Set<UserEntity> getUserEntities() {
-        return this.userEntities;
-    }
-
-    public void setUserEntities(Set<UserEntity> userEntities) {
-        this.userEntities = userEntities;
     }
 }

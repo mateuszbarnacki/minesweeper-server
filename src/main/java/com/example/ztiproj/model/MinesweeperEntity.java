@@ -1,20 +1,23 @@
 package com.example.ztiproj.model;
 
-import jakarta.nosql.mapping.Column;
-import jakarta.nosql.mapping.Entity;
-import jakarta.nosql.mapping.Id;
+import com.example.ztiproj.common.Labels;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
+@Document(value = Labels.MINESWEEPER_ENTITY)
 public class MinesweeperEntity {
     @Id
     private Long id;
-    @Column
+    @Indexed(name = Labels.MINESWEEPER_ENTITY_INDEX_NAME, background = true)
+    private String userName;
     private Long time;
 
     public MinesweeperEntity() {
     }
 
-    public MinesweeperEntity(Long time) {
+    public MinesweeperEntity(String userName, Long time) {
+        this.userName = userName;
         this.time = time;
     }
 
@@ -24,6 +27,14 @@ public class MinesweeperEntity {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getUserName() {
+        return this.userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public Long getTime() {

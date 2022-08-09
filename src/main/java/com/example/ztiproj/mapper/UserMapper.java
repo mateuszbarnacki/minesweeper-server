@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 public class UserMapper {
-
     public UserEntity map(final UserDto dto) {
         return new UserEntity(dto.getUserName(), dto.getPassword());
     }

@@ -1,41 +1,17 @@
 package com.example.ztiproj.model;
 
 import com.example.ztiproj.common.Labels;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Set;
-
-@Entity(name = Labels.USER_ENTITY)
+@Document(value = Labels.USER_ENTITY)
 public class UserEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Indexed(name = Labels.USER_ENTITY_INDEX_NAME, unique = true, background = true)
     private String userName;
     private String password;
-    @ManyToMany
-    @JoinTable(
-            name = "user_minesweeper",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "minesweeper_id"))
-    private Set<MinesweeperEntity> minesweeperEntities;
-    @ManyToMany
-    @JoinTable(
-            name = "user_tetris",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "tetris_id"))
-    private Set<TetrisEntity> tetrisEntities;
-    @ManyToMany
-    @JoinTable(
-            name = "user_snake",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "snake_id"))
-    private Set<SnakeEntity>snakeEntities;
 
     public UserEntity() {}
 
@@ -66,29 +42,5 @@ public class UserEntity {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Set<MinesweeperEntity> getMinesweeperEntities() {
-        return this.minesweeperEntities;
-    }
-
-    public void setMinesweeperEntities(Set<MinesweeperEntity> minesweeperEntities) {
-        this.minesweeperEntities = minesweeperEntities;
-    }
-
-    public Set<TetrisEntity> getTetrisEntities() {
-        return this.tetrisEntities;
-    }
-
-    public void setTetrisEntities(Set<TetrisEntity> tetrisEntities) {
-        this.tetrisEntities = tetrisEntities;
-    }
-
-    public Set<SnakeEntity> getSnakeEntities() {
-        return this.snakeEntities;
-    }
-
-    public void setSnakeEntities(Set<SnakeEntity> snakeEntities) {
-        this.snakeEntities = snakeEntities;
     }
 }

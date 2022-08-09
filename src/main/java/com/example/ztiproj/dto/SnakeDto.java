@@ -8,5 +8,6 @@ import lombok.Value;
 @Builder
 @NonNull
 public class SnakeDto {
+    String userName;
     Long score;
 }
