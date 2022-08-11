@@ -9,5 +9,5 @@ import lombok.Value;
 @NonNull
 public class MinesweeperDto {
     String userName;
-    Long time;
+    String time;
 }

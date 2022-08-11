@@ -3,7 +3,9 @@ package com.example.ztiproj.mapper;
 import com.example.ztiproj.dto.SnakeDto;
 import com.example.ztiproj.model.SnakeEntity;
 import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
 
+@Component
 @NoArgsConstructor
 public class SnakeMapper {
     public SnakeEntity map(SnakeDto dto) {

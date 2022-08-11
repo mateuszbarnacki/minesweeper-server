@@ -2,30 +2,35 @@ package com.example.ztiproj.controller.impl;
 
 import com.example.ztiproj.controller.api.MinesweeperController;
 import com.example.ztiproj.dto.MinesweeperDto;
+import com.example.ztiproj.service.MinesweeperService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
+
 @AllArgsConstructor
 public class MinesweeperControllerImpl implements MinesweeperController {
-    //private MinesweeperService minesweeperService;
+    private final MinesweeperService service;
 
     @Override
-    public ResponseEntity<MinesweeperDto> getRanking() {
-        return null;
+    public ResponseEntity<List<MinesweeperDto>> getRanking() {
+        return ResponseEntity.ok(service.getRanking());
     }
 
     @Override
-    public ResponseEntity<MinesweeperDto> getUserRanking(String username) {
-        return null;
+    public ResponseEntity<List<MinesweeperDto>> getUserRanking(String username) {
+        return ResponseEntity.ok(service.getUserRanking(username));
     }
 
     @Override
     public ResponseEntity<MinesweeperDto> addResult(MinesweeperDto dto) {
-        return null;
+        return service.addResult(dto)
+                .map(ResponseEntity::ok)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid object!"));
     }
 
     @Override
     public void deleteAllUserResults(String username) {
-
+        service.deleteAllUserResults(username);
     }
 }

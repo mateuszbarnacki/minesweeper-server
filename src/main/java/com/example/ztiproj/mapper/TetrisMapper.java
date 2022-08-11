@@ -3,7 +3,9 @@ package com.example.ztiproj.mapper;
 import com.example.ztiproj.dto.TetrisDto;
 import com.example.ztiproj.model.TetrisEntity;
 import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
 
+@Component
 @NoArgsConstructor
 public class TetrisMapper {
     public TetrisEntity map(TetrisDto dto) {

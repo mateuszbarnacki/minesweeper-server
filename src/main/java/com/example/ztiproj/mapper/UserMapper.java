@@ -3,7 +3,9 @@ package com.example.ztiproj.mapper;
 import com.example.ztiproj.dto.UserDto;
 import com.example.ztiproj.model.UserEntity;
 import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
 
+@Component
 @NoArgsConstructor
 public class UserMapper {
     public UserEntity map(final UserDto dto) {

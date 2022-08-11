@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/minesweeper")
 public interface MinesweeperController {
@@ -24,7 +26,7 @@ public interface MinesweeperController {
             @ApiResponse(code = 200, message = "All results returned successfully"),
             @ApiResponse(code = 404, message = "User not found"),
             @ApiResponse(code = 500, message = "Server crashed")})
-    ResponseEntity<MinesweeperDto> getRanking();
+    ResponseEntity<List<MinesweeperDto>> getRanking();
 
     @GetMapping(path = "/user-results", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Get ranking for user", notes = "Method returns the top results for user" +
@@ -33,7 +35,7 @@ public interface MinesweeperController {
             @ApiResponse(code = 200, message = "All user results returned successfully"),
             @ApiResponse(code = 404, message = "User not found"),
             @ApiResponse(code = 500, message = "Server crashed")})
-    ResponseEntity<MinesweeperDto> getUserRanking(@RequestParam("username") String username);
+    ResponseEntity<List<MinesweeperDto>> getUserRanking(@RequestParam("username") String username);
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Add result", notes = "Method add the result to database.")
