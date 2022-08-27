@@ -9,12 +9,19 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface MinesweeperRepository extends MongoRepository<MinesweeperEntity, Long> {
+public interface MinesweeperRepository extends MongoRepository<MinesweeperEntity, String> {
 
-    @Aggregation("{}, {'limit': 10}")
+    @Aggregation(pipeline = {
+            "{'$sort': {'time': 1}}",
+            "{'$limit': 10}"
+    })
     List<MinesweeperEntity> getTopScores();
 
-    @Aggregation("{'username': ?1}, {'limit': 10}")
+    @Aggregation(pipeline = {
+            "{'$match':{'username': ?0}}",
+            "{'$sort': {'time': 1}}",
+            "{'$limit': 10}"
+    })
     List<MinesweeperEntity> getTopUserScores(String userName);
 
     @Query(value = "{'username' : ?0}", delete = true)

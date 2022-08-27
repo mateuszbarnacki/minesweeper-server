@@ -4,13 +4,18 @@ import com.example.ztiproj.common.Labels;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(value = Labels.USER_ENTITY)
 public class UserEntity {
     @Id
-    private Long id;
+    private String id;
+
     @Indexed(name = Labels.USER_ENTITY_INDEX_NAME, unique = true, background = true)
+    @Field(name = "username")
     private String userName;
+
+    @Field(name = "password")
     private String password;
 
     public UserEntity() {}
@@ -20,11 +25,11 @@ public class UserEntity {
         this.password = password;
     }
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

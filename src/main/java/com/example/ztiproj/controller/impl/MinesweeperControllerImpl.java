@@ -5,9 +5,11 @@ import com.example.ztiproj.dto.MinesweeperDto;
 import com.example.ztiproj.service.MinesweeperService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@RestController
 @AllArgsConstructor
 public class MinesweeperControllerImpl implements MinesweeperController {
     private final MinesweeperService service;

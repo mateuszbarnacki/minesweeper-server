@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface SnakeRepository extends MongoRepository<SnakeEntity, Long> {
+public interface SnakeRepository extends MongoRepository<SnakeEntity, String> {
 
     @Aggregation("{}, {'limit': 10}")
     List<SnakeEntity> getTopScores();

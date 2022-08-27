@@ -4,13 +4,18 @@ import com.example.ztiproj.common.Labels;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(value = Labels.TETRIS_ENTITY)
 public class TetrisEntity {
     @Id
-    private Long id;
+    private String id;
+
     @Indexed(name = Labels.TETRIS_ENTITY_INDEX_NAME, background = true)
+    @Field(name = "username")
     private String userName;
+
+    @Field(name = "score")
     private Long score;
 
     public TetrisEntity() {
@@ -21,11 +26,11 @@ public class TetrisEntity {
         this.score = score;
     }
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

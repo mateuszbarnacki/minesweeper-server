@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface TetrisRepository extends MongoRepository<TetrisEntity, Long> {
+public interface TetrisRepository extends MongoRepository<TetrisEntity, String> {
 
     @Aggregation("{}, {'limit': 10}")
     List<TetrisEntity> getTopScores();

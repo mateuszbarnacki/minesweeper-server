@@ -23,9 +23,9 @@ public class MinesweeperMapper {
 
     private Long mapDtoToEntityTime(String time) {
         String[] timeElements = time.split(":");
-        int multiplier = 24;
+        int multiplier = 1;
         long timeInSeconds = 0L;
-        for (int i = 0; i < 3; i++) {
+        for (int i = 2; i >= 0; i--) {
             timeInSeconds += (Long.parseLong(timeElements[i]) * multiplier);
             multiplier *= 60;
         }
@@ -36,6 +36,10 @@ public class MinesweeperMapper {
         String seconds = String.valueOf(time % 60);
         String minutes = String.valueOf(time / 60);
         String hours = String.valueOf(time / 3600);
+
+        if (hours.length() == 1) {
+            hours = "0" + hours;
+        }
 
         return hours + ":" + minutes + ":" + seconds;
     }
