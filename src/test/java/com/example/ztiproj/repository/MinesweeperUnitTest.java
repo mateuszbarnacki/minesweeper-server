@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @RunWith(SpringRunner.class)
 @DataMongoTest
 @TestPropertySource(properties = "spring.mongodb.embedded.version=3.5.5")
-public class MinesweeperIntegrationTest {
+public class MinesweeperUnitTest {
     @Autowired
     private MinesweeperRepository repository;
 

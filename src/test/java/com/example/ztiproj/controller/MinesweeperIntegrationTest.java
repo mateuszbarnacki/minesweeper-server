@@ -34,7 +34,7 @@ import static org.mockito.Mockito.when;
 @RunWith(SpringRunner.class)
 @WebMvcTest(MinesweeperControllerImpl.class)
 @AutoConfigureMockMvc(addFilters = false)
-public class MinesweeperControllerTest {
+public class MinesweeperIntegrationTest {
 
     @MockBean
     private MinesweeperService service;
