@@ -2,12 +2,18 @@ package com.example.ztiproj.controller.impl;
 
 import com.example.ztiproj.controller.api.TetrisController;
 import com.example.ztiproj.dto.TetrisDto;
-import com.example.ztiproj.service.TetrisService;
+import com.example.ztiproj.service.api.TetrisService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
+/**
+ * @author Mateusz Barnacki
+ * @version 1.0
+ * @since 2022-08-11
+ */
 @AllArgsConstructor
 public class TetrisControllerImpl implements TetrisController {
     private final TetrisService service;
@@ -24,9 +30,7 @@ public class TetrisControllerImpl implements TetrisController {
 
     @Override
     public ResponseEntity<TetrisDto> addResult(TetrisDto dto) {
-        return service.addResult(dto)
-                .map(ResponseEntity::ok)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid object!"));
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.addResult(dto));
     }
 
     @Override

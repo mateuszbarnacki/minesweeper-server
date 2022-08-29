@@ -1,8 +1,9 @@
-package com.example.ztiproj.service;
+package com.example.ztiproj.service.impl;
 
 import com.example.ztiproj.dto.MinesweeperDto;
 import com.example.ztiproj.mapper.MinesweeperMapper;
 import com.example.ztiproj.repository.MinesweeperRepository;
+import com.example.ztiproj.service.api.MinesweeperService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -10,9 +11,14 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * @author Mateusz Barnacki
+ * @version 1.0
+ * @since 2022-08-11
+ */
 @Service
 @AllArgsConstructor
-public class MinesweeperService {
+public class MinesweeperServiceImpl implements MinesweeperService {
     private final MinesweeperRepository repository;
     private final MinesweeperMapper mapper;
 

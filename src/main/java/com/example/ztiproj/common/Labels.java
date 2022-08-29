@@ -1,5 +1,10 @@
 package com.example.ztiproj.common;
 
+/**
+ * @author Mateusz Barnacki
+ * @version 1.0
+ * @since 2022-08-09
+ */
 public final class Labels {
     public static final String USER_ENTITY = "user";
     public static final String MINESWEEPER_ENTITY = "minesweeper";

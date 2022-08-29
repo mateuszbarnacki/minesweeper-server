@@ -1,8 +1,9 @@
-package com.example.ztiproj.service;
+package com.example.ztiproj.service.impl;
 
 import com.example.ztiproj.dto.SnakeDto;
 import com.example.ztiproj.mapper.SnakeMapper;
 import com.example.ztiproj.repository.SnakeRepository;
+import com.example.ztiproj.service.api.SnakeService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -10,9 +11,14 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * @author Mateusz Barnacki
+ * @version 1.0
+ * @since 2022-08-11
+ */
 @Service
 @AllArgsConstructor
-public class SnakeService {
+public class SnakeServiceImpl implements SnakeService {
     private final SnakeRepository repository;
     private final SnakeMapper mapper;
 
@@ -30,11 +36,12 @@ public class SnakeService {
                 .collect(Collectors.toList());
     }
 
-    public Optional<SnakeDto> addResult(SnakeDto snakeDto) {
+    public SnakeDto addResult(SnakeDto snakeDto) {
         return Optional.ofNullable(snakeDto)
                 .map(mapper::map)
                 .map(repository::insert)
-                .map(mapper::map);
+                .map(mapper::map)
+                .orElseThrow(() -> new IllegalArgumentException("Ivalid snake dto!"));
     }
 
     public void deleteAllUserResults(String userName) {

@@ -8,6 +8,11 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * @author Mateusz Barnacki
+ * @version 1.0
+ * @since 2022-08-09
+ */
 @Repository
 public interface SnakeRepository extends MongoRepository<SnakeEntity, String> {
 

@@ -2,7 +2,7 @@ package com.example.ztiproj.controller.impl;
 
 import com.example.ztiproj.controller.api.MinesweeperController;
 import com.example.ztiproj.dto.MinesweeperDto;
-import com.example.ztiproj.service.MinesweeperService;
+import com.example.ztiproj.service.api.MinesweeperService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * @author Mateusz Barnacki
+ * @version 1.0
+ * @since 2022-08-09
+ */
 @RestController
 @AllArgsConstructor
 public class MinesweeperControllerImpl implements MinesweeperController {

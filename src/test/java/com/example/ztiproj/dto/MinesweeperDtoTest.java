@@ -9,6 +9,11 @@ import org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoAutoCo
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+/**
+ * @author Mateusz Barnacki
+ * @version 1.0
+ * @since 2022-08-27
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @ImportAutoConfiguration(exclude = EmbeddedMongoAutoConfiguration.class)

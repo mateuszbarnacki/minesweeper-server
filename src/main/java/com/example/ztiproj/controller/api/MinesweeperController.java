@@ -15,6 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
+/**
+ * @author Mateusz Barnacki
+ * @version 1.0
+ * @since 2022-08-09
+ */
 @RequestMapping("/minesweeper")
 public interface MinesweeperController {
 

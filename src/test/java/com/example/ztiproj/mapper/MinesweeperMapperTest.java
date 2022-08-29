@@ -12,6 +12,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * @author Mateusz Barnacki
+ * @version 1.0
+ * @since 2022-08-27
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @ImportAutoConfiguration(exclude = EmbeddedMongoAutoConfiguration.class)

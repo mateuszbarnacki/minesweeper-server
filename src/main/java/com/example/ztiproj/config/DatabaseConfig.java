@@ -10,6 +10,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
+/**
+ * @author Mateusz Barnacki
+ * @version 1.0
+ * @since 2022-08-11
+ */
 @Configuration
 @EnableMongoRepositories(basePackageClasses = {MinesweeperRepository.class, TetrisRepository.class,
         SnakeRepository.class, UserRepository.class})

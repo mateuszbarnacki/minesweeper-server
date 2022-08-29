@@ -2,7 +2,7 @@ package com.example.ztiproj.controller;
 
 import com.example.ztiproj.controller.impl.MinesweeperControllerImpl;
 import com.example.ztiproj.dto.MinesweeperDto;
-import com.example.ztiproj.service.MinesweeperService;
+import com.example.ztiproj.service.impl.MinesweeperServiceImpl;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -31,13 +31,18 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+/**
+ * @author Mateusz Barnacki
+ * @version 1.0
+ * @since 2022-08-29
+ */
 @RunWith(SpringRunner.class)
 @WebMvcTest(MinesweeperControllerImpl.class)
 @AutoConfigureMockMvc(addFilters = false)
 public class MinesweeperIntegrationTest {
 
     @MockBean
-    private MinesweeperService service;
+    private MinesweeperServiceImpl service;
 
     @Autowired
     private WebApplicationContext webApplicationContext;

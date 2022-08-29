@@ -5,6 +5,11 @@ import com.example.ztiproj.model.SnakeEntity;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author Mateusz Barnacki
+ * @version 1.0
+ * @since 2022-08-06
+ */
 @Component
 @NoArgsConstructor
 public class SnakeMapper {

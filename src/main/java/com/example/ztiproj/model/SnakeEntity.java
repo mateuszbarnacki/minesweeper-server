@@ -6,6 +6,11 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+/**
+ * @author Mateusz Barnacki
+ * @version 1.0
+ * @since 2022-08-06
+ */
 @Document(value = Labels.SNAKE_ENTITY)
 public class SnakeEntity {
     @Id
