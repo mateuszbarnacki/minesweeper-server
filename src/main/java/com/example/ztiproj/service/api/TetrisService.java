@@ -39,7 +39,6 @@ public interface TetrisService {
      * This method deletes all users with specified userName from database.
      *
      * @param userName This is the public name of the user.
-     * @return Nothing.
      */
     void deleteAllUserResults(String userName);
 
