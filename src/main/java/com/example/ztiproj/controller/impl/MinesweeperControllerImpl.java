@@ -4,6 +4,7 @@ import com.example.ztiproj.controller.api.MinesweeperController;
 import com.example.ztiproj.dto.MinesweeperDto;
 import com.example.ztiproj.service.MinesweeperService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,9 +27,7 @@ public class MinesweeperControllerImpl implements MinesweeperController {
 
     @Override
     public ResponseEntity<MinesweeperDto> addResult(MinesweeperDto dto) {
-        return service.addResult(dto)
-                .map(ResponseEntity::ok)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid object!"));
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.addResult(dto));
     }
 
     @Override

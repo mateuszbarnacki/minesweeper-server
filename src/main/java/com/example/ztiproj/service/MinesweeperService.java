@@ -30,11 +30,12 @@ public class MinesweeperService {
                 .collect(Collectors.toList());
     }
 
-    public Optional<MinesweeperDto> addResult(MinesweeperDto minesweeperDto) {
+    public MinesweeperDto addResult(MinesweeperDto minesweeperDto) {
         return Optional.ofNullable(minesweeperDto)
                 .map(mapper::map)
-                .map(repository::insert)
-                .map(mapper::map);
+                .map(repository::save)
+                .map(mapper::map)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid minesweeper dto!"));
     }
 
     public void deleteAllUserResults(String userName) {
