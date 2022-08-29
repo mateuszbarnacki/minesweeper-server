@@ -56,7 +56,7 @@ public class MinesweeperIntegrationTest {
                 .thenReturn(List.of(MinesweeperDto.builder().userName("matib").time("00:04:13").build()));
 
         mvc.perform(MockMvcRequestBuilders.get("/minesweeper")
-                .contentType(MediaType.APPLICATION_JSON_VALUE))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.size()", Matchers.is(1)))
