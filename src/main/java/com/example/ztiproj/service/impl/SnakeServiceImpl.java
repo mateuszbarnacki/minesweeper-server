@@ -1,9 +1,11 @@
 package com.example.ztiproj.service.impl;
 
 import com.example.ztiproj.dto.SnakeDto;
+import com.example.ztiproj.exception.InvalidSnakeResultException;
 import com.example.ztiproj.mapper.SnakeMapper;
 import com.example.ztiproj.repository.SnakeRepository;
 import com.example.ztiproj.service.api.SnakeService;
+import com.example.ztiproj.service.api.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class SnakeServiceImpl implements SnakeService {
     private final SnakeRepository repository;
+    private final UserService userService;
     private final SnakeMapper mapper;
 
     public List<SnakeDto> getRanking() {
@@ -30,6 +33,7 @@ public class SnakeServiceImpl implements SnakeService {
     }
 
     public List<SnakeDto> getUserRanking(String userName) {
+        userService.checkUser(userName);
         return repository.getTopUserScores(userName)
                 .stream()
                 .map(mapper::map)
@@ -41,10 +45,11 @@ public class SnakeServiceImpl implements SnakeService {
                 .map(mapper::map)
                 .map(repository::insert)
                 .map(mapper::map)
-                .orElseThrow(() -> new IllegalArgumentException("Ivalid snake dto!"));
+                .orElseThrow(InvalidSnakeResultException::new);
     }
 
     public void deleteAllUserResults(String userName) {
+        userService.checkUser(userName);
         repository.deleteByUserName(userName);
     }
 }

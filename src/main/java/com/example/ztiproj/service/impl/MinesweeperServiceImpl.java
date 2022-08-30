@@ -1,9 +1,11 @@
 package com.example.ztiproj.service.impl;
 
 import com.example.ztiproj.dto.MinesweeperDto;
+import com.example.ztiproj.exception.InvalidMinesweeperResultException;
 import com.example.ztiproj.mapper.MinesweeperMapper;
 import com.example.ztiproj.repository.MinesweeperRepository;
 import com.example.ztiproj.service.api.MinesweeperService;
+import com.example.ztiproj.service.api.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class MinesweeperServiceImpl implements MinesweeperService {
     private final MinesweeperRepository repository;
+    private final UserService userService;
     private final MinesweeperMapper mapper;
 
     public List<MinesweeperDto> getRanking() {
@@ -30,6 +33,7 @@ public class MinesweeperServiceImpl implements MinesweeperService {
     }
 
     public List<MinesweeperDto> getUserRanking(String userName) {
+        userService.checkUser(userName);
         return repository.getTopUserScores(userName)
                 .stream()
                 .map(mapper::map)
@@ -41,10 +45,11 @@ public class MinesweeperServiceImpl implements MinesweeperService {
                 .map(mapper::map)
                 .map(repository::save)
                 .map(mapper::map)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid minesweeper dto!"));
+                .orElseThrow(InvalidMinesweeperResultException::new);
     }
 
     public void deleteAllUserResults(String userName) {
+        userService.checkUser(userName);
         repository.deleteByUserName(userName);
     }
 }

@@ -1,6 +1,7 @@
 package com.example.ztiproj.service.api;
 
 import com.example.ztiproj.dto.TetrisDto;
+import com.example.ztiproj.exception.InvalidTetrisResultException;
 
 import java.util.List;
 
@@ -31,7 +32,7 @@ public interface TetrisService {
      *
      * @param tetrisDto This is the object which going to be saved in the database.
      * @return TetrisDto This is the object which contains saved data.
-     * @throws IllegalArgumentException If the parameter is invalid, method throws exception.
+     * @throws InvalidTetrisResultException If the parameter is invalid, method throws exception.
      */
     TetrisDto addResult(TetrisDto tetrisDto);
 

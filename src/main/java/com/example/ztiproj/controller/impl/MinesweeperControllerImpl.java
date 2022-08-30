@@ -2,6 +2,7 @@ package com.example.ztiproj.controller.impl;
 
 import com.example.ztiproj.controller.api.MinesweeperController;
 import com.example.ztiproj.dto.MinesweeperDto;
+import com.example.ztiproj.exception.InvalidMinesweeperResultException;
 import com.example.ztiproj.service.api.MinesweeperService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -32,7 +33,11 @@ public class MinesweeperControllerImpl implements MinesweeperController {
 
     @Override
     public ResponseEntity<MinesweeperDto> addResult(MinesweeperDto dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.addResult(dto));
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(service.addResult(dto));
+        } catch (NullPointerException e) {
+            throw new InvalidMinesweeperResultException("Null dto provided!");
+        }
     }
 
     @Override

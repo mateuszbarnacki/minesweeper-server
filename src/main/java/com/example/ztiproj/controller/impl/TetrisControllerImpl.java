@@ -2,6 +2,7 @@ package com.example.ztiproj.controller.impl;
 
 import com.example.ztiproj.controller.api.TetrisController;
 import com.example.ztiproj.dto.TetrisDto;
+import com.example.ztiproj.exception.InvalidTetrisResultException;
 import com.example.ztiproj.service.api.TetrisService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -30,7 +31,11 @@ public class TetrisControllerImpl implements TetrisController {
 
     @Override
     public ResponseEntity<TetrisDto> addResult(TetrisDto dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.addResult(dto));
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(service.addResult(dto));
+        } catch (NullPointerException e) {
+            throw new InvalidTetrisResultException("Null dto provided!");
+        }
     }
 
     @Override

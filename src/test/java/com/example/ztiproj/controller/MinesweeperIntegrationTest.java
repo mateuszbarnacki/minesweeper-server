@@ -107,6 +107,14 @@ public class MinesweeperIntegrationTest {
     }
 
     @Test
+    public void shouldReturn400StatusCode() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.post("/minesweeper")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+    }
+
+    @Test
     public void shouldAllUserResultsBeDeleted() throws Exception {
         mvc.perform(MockMvcRequestBuilders.delete("/minesweeper/{username}", "matib"))
                 .andExpect(MockMvcResultMatchers.status().isOk());

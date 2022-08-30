@@ -2,6 +2,7 @@ package com.example.ztiproj.controller.impl;
 
 import com.example.ztiproj.controller.api.SnakeController;
 import com.example.ztiproj.dto.SnakeDto;
+import com.example.ztiproj.exception.InvalidSnakeResultException;
 import com.example.ztiproj.service.api.SnakeService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -30,7 +31,11 @@ public class SnakeControllerImpl implements SnakeController {
 
     @Override
     public ResponseEntity<SnakeDto> addResult(SnakeDto dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.addResult(dto));
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(service.addResult(dto));
+        } catch (NullPointerException e) {
+            throw new InvalidSnakeResultException("Null dto provided!");
+        }
     }
 
     @Override

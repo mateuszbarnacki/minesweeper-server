@@ -1,6 +1,7 @@
 package com.example.ztiproj.service.api;
 
 import com.example.ztiproj.dto.UserDto;
+import com.example.ztiproj.exception.NonExistentUserException;
 
 /**
  * @author Mateusz Barnacki
@@ -22,7 +23,15 @@ public interface UserService {
      *
      * @param userDto This is the object which going to be saved in the database.
      * @return UserDto This is the object which contains saved data.
-     * @throws IllegalArgumentException  If the parameter is invalid, method throws exception.
+     * @throws IllegalArgumentException If the parameter is invalid, method throws exception.
      */
     UserDto addUser(UserDto userDto);
+
+    /**
+     * This method check if the user exists in the database.
+     *
+     * @param username This is the public name of the user.
+     * @throws NonExistentUserException If the user does not exist, method throws exception.
+     */
+    void checkUser(String username);
 }
