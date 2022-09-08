@@ -5,7 +5,6 @@ import com.example.ztiproj.exception.InvalidTetrisResultException;
 import com.example.ztiproj.mapper.TetrisMapper;
 import com.example.ztiproj.repository.TetrisRepository;
 import com.example.ztiproj.service.api.TetrisService;
-import com.example.ztiproj.service.api.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +21,6 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class TetrisServiceImpl implements TetrisService {
     private final TetrisRepository repository;
-    private final UserService userService;
     private final TetrisMapper mapper;
 
     public List<TetrisDto> getRanking() {
@@ -33,7 +31,6 @@ public class TetrisServiceImpl implements TetrisService {
     }
 
     public List<TetrisDto> getUserRanking(String userName) {
-        userService.checkUser(userName);
         return repository.getTopUserScores(userName)
                 .stream()
                 .map(mapper::map)
@@ -49,7 +46,6 @@ public class TetrisServiceImpl implements TetrisService {
     }
 
     public void deleteAllUserResults(String userName) {
-        userService.checkUser(userName);
         repository.deleteByUserName(userName);
     }
 }
