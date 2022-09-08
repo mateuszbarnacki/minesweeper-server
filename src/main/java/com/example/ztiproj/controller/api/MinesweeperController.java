@@ -31,7 +31,7 @@ public interface MinesweeperController {
             @ApiResponse(code = 500, message = "Server crashed")})
     ResponseEntity<List<MinesweeperDto>> getRanking();
 
-    @GetMapping(path = "/user-results/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Get ranking for user", notes = "Method returns the top results for user" +
             " specified in username parameter. Ranking contains up to 10 results.")
     @ApiResponses(value = {

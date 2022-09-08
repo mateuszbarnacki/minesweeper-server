@@ -75,7 +75,7 @@ public class MinesweeperIntegrationTest {
         when(service.getUserRanking(userName))
                 .thenReturn(List.of(MinesweeperDto.builder().userName(userName).time("00:13:04").build()));
 
-        mvc.perform(MockMvcRequestBuilders.get("/minesweeper/user-results/{username}", userName))
+        mvc.perform(MockMvcRequestBuilders.get("/minesweeper/{username}", userName))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.size()", Matchers.is(1)))

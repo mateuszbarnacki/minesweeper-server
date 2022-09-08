@@ -8,10 +8,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -33,14 +33,14 @@ public interface SnakeController {
             @ApiResponse(code = 500, message = "Server crashed")})
     ResponseEntity<List<SnakeDto>> getRanking();
 
-    @GetMapping(path = "/user-results", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Get ranking for user", notes = "Method returns the top results for user" +
             " specified in username parameter. Ranking contains up to 10 results.")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "All user results returned successfully"),
             @ApiResponse(code = 404, message = "User not found"),
             @ApiResponse(code = 500, message = "Server crashed")})
-    ResponseEntity<List<SnakeDto>> getUserRanking(@RequestParam("username") String username);
+    ResponseEntity<List<SnakeDto>> getUserRanking(@PathVariable("username") String username);
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Add result", notes = "Method add the result to database.")
@@ -50,12 +50,12 @@ public interface SnakeController {
             @ApiResponse(code = 500, message = "Server crashed")})
     ResponseEntity<SnakeDto> addResult(@RequestBody SnakeDto dto);
 
-    @DeleteMapping
+    @DeleteMapping("/{username}")
     @ApiOperation(hidden = true, value = "Delete result", notes = "Method deletes all user results.")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "All user results deleted successfully"),
             @ApiResponse(code = 404, message = "User not found"),
             @ApiResponse(code = 500, message = "Server crashed")})
-    void deleteAllUserResults(@RequestParam("username") String username);
+    void deleteAllUserResults(@PathVariable("username") String username);
 
 }
