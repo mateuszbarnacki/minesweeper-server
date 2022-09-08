@@ -10,6 +10,11 @@ import org.springframework.stereotype.Component;
 import java.util.Arrays;
 import java.util.logging.Logger;
 
+/**
+ * @author Mateusz Barnacki
+ * @version 1.0
+ * @since 2022-08-30
+ */
 @Aspect
 @Component
 public class LoggingAspect {
