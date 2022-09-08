@@ -18,14 +18,14 @@ import java.util.List;
 public interface SnakeRepository extends MongoRepository<Snake, String> {
 
     @Aggregation(pipeline = {
-            "{'$sort': {'" + Labels.SNAKE_SCORE + "': 1}}",
+            "{'$sort': {'" + Labels.SNAKE_SCORE + "': -1}}",
             "{'$limit': 10}"
     })
     List<Snake> getTopScores();
 
     @Aggregation(pipeline = {
             "{'$match':{'" + Labels.SNAKE_USERNAME + "': ?0}}",
-            "{'$sort': {'" + Labels.SNAKE_SCORE + "': 1}}",
+            "{'$sort': {'" + Labels.SNAKE_SCORE + "': -1}}",
             "{'$limit': 10}"
     })
     List<Snake> getTopUserScores(String userName);

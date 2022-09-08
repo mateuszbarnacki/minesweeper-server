@@ -18,14 +18,14 @@ import java.util.List;
 public interface TetrisRepository extends MongoRepository<Tetris, String> {
 
     @Aggregation(pipeline = {
-            "{'$sort': {'" + Labels.TETRIS_SCORE + "': 1}}",
+            "{'$sort': {'" + Labels.TETRIS_SCORE + "': -1}}",
             "{'$limit': 10}"
     })
     List<Tetris> getTopScores();
 
     @Aggregation(pipeline = {
             "{'$match':{'" + Labels.TETRIS_USERNAME + "': ?0}}",
-            "{'$sort': {'" + Labels.TETRIS_SCORE + "': 1}}",
+            "{'$sort': {'" + Labels.TETRIS_SCORE + "': -1}}",
             "{'$limit': 10}"
     })
     List<Tetris> getTopUserScores(String userName);
