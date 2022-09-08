@@ -1,5 +1,6 @@
 package com.example.ztiproj.controller.impl;
 
+import com.example.ztiproj.common.Labels;
 import com.example.ztiproj.controller.api.SnakeController;
 import com.example.ztiproj.dto.SnakeDto;
 import com.example.ztiproj.exception.InvalidSnakeResultException;
@@ -34,7 +35,7 @@ public class SnakeControllerImpl implements SnakeController {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(service.addResult(dto));
         } catch (NullPointerException e) {
-            throw new InvalidSnakeResultException("Null dto provided!");
+            throw new InvalidSnakeResultException(Labels.NULL_DTO_EXCEPTION_MESSAGE);
         }
     }
 

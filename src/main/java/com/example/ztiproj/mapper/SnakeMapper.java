@@ -1,7 +1,7 @@
 package com.example.ztiproj.mapper;
 
 import com.example.ztiproj.dto.SnakeDto;
-import com.example.ztiproj.model.SnakeEntity;
+import com.example.ztiproj.model.Snake;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -13,11 +13,11 @@ import org.springframework.stereotype.Component;
 @Component
 @NoArgsConstructor
 public class SnakeMapper {
-    public SnakeEntity map(SnakeDto dto) {
-        return new SnakeEntity(dto.getUserName(), dto.getScore());
+    public Snake map(SnakeDto dto) {
+        return new Snake(dto.getUserName(), dto.getScore());
     }
 
-    public SnakeDto map(SnakeEntity entity) {
+    public SnakeDto map(Snake entity) {
         return SnakeDto.builder()
                 .userName(entity.getUserName())
                 .score(entity.getScore())

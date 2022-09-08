@@ -1,5 +1,6 @@
 package com.example.ztiproj.controller.impl;
 
+import com.example.ztiproj.common.Labels;
 import com.example.ztiproj.controller.api.MinesweeperController;
 import com.example.ztiproj.dto.MinesweeperDto;
 import com.example.ztiproj.exception.InvalidMinesweeperResultException;
@@ -36,7 +37,7 @@ public class MinesweeperControllerImpl implements MinesweeperController {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(service.addResult(dto));
         } catch (NullPointerException e) {
-            throw new InvalidMinesweeperResultException("Null dto provided!");
+            throw new InvalidMinesweeperResultException(Labels.NULL_DTO_EXCEPTION_MESSAGE);
         }
     }
 

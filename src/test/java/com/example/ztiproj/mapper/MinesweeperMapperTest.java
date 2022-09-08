@@ -1,7 +1,7 @@
 package com.example.ztiproj.mapper;
 
 import com.example.ztiproj.dto.MinesweeperDto;
-import com.example.ztiproj.model.MinesweeperEntity;
+import com.example.ztiproj.model.Minesweeper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class MinesweeperMapperTest {
 
     @Test
     public void shouldMapEntityToDto() {
-        MinesweeperEntity entity = new MinesweeperEntity();
+        Minesweeper entity = new Minesweeper();
         entity.setUserName("Matib");
         entity.setTime(777L);
 
@@ -44,7 +44,7 @@ public class MinesweeperMapperTest {
                 .time("00:04:13")
                 .build();
 
-        MinesweeperEntity entity = this.minesweeperMapper.map(dto);
+        Minesweeper entity = this.minesweeperMapper.map(dto);
 
         assertThat(entity).hasFieldOrPropertyWithValue("userName", "matib")
                 .hasFieldOrPropertyWithValue("time", 253L);

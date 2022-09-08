@@ -1,6 +1,7 @@
 package com.example.ztiproj.repository;
 
-import com.example.ztiproj.model.SnakeEntity;
+import com.example.ztiproj.common.Labels;
+import com.example.ztiproj.model.Snake;
 import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
@@ -14,15 +15,22 @@ import java.util.List;
  * @since 2022-08-09
  */
 @Repository
-public interface SnakeRepository extends MongoRepository<SnakeEntity, String> {
+public interface SnakeRepository extends MongoRepository<Snake, String> {
 
-    @Aggregation("{}, {'limit': 10}")
-    List<SnakeEntity> getTopScores();
+    @Aggregation(pipeline = {
+            "{'$sort': {'" + Labels.SNAKE_SCORE + "': 1}}",
+            "{'$limit': 10}"
+    })
+    List<Snake> getTopScores();
 
-    @Aggregation("{'username': ?1}, {'limit': 10}")
-    List<SnakeEntity> getTopUserScores(String userName);
+    @Aggregation(pipeline = {
+            "{'$match':{'" + Labels.SNAKE_USERNAME + "': ?0}}",
+            "{'$sort': {'" + Labels.SNAKE_SCORE + "': 1}}",
+            "{'$limit': 10}"
+    })
+    List<Snake> getTopUserScores(String userName);
 
-    @Query(value = "{'username' : ?0}", delete = true)
+    @Query(value = "{'" + Labels.SNAKE_USERNAME + "' : ?0}", delete = true)
     void deleteByUserName(String userName);
 
 }

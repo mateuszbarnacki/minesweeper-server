@@ -1,6 +1,6 @@
 package com.example.ztiproj.repository;
 
-import com.example.ztiproj.model.MinesweeperEntity;
+import com.example.ztiproj.model.Minesweeper;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,44 +29,44 @@ public class MinesweeperUnitTest {
 
     @Before
     public void setUp() {
-        repository.save(new MinesweeperEntity("Abacki", 10L));
-        repository.save(new MinesweeperEntity("Abacki", 52L));
-        repository.save(new MinesweeperEntity("Babacki", 32L));
-        repository.save(new MinesweeperEntity("Abacki", 26L));
-        repository.save(new MinesweeperEntity("Abacki", 24L));
-        repository.save(new MinesweeperEntity("Abacki", 14L));
-        repository.save(new MinesweeperEntity("Cabacki", 15L));
-        repository.save(new MinesweeperEntity("Dadacki", 33L));
-        repository.save(new MinesweeperEntity("Abacki", 21L));
-        repository.save(new MinesweeperEntity("Abacki", 17L));
-        repository.save(new MinesweeperEntity("Babacki", 28L));
-        repository.save(new MinesweeperEntity("Abacki", 13L));
-        repository.save(new MinesweeperEntity("Abacki", 24L));
-        repository.save(new MinesweeperEntity("Abacki", 20L));
-        repository.save(new MinesweeperEntity("Abacki", 16L));
-        repository.save(new MinesweeperEntity("Abacki", 9L));
+        repository.save(new Minesweeper("Abacki", 10L));
+        repository.save(new Minesweeper("Abacki", 52L));
+        repository.save(new Minesweeper("Babacki", 32L));
+        repository.save(new Minesweeper("Abacki", 26L));
+        repository.save(new Minesweeper("Abacki", 24L));
+        repository.save(new Minesweeper("Abacki", 14L));
+        repository.save(new Minesweeper("Cabacki", 15L));
+        repository.save(new Minesweeper("Dadacki", 33L));
+        repository.save(new Minesweeper("Abacki", 21L));
+        repository.save(new Minesweeper("Abacki", 17L));
+        repository.save(new Minesweeper("Babacki", 28L));
+        repository.save(new Minesweeper("Abacki", 13L));
+        repository.save(new Minesweeper("Abacki", 24L));
+        repository.save(new Minesweeper("Abacki", 20L));
+        repository.save(new Minesweeper("Abacki", 16L));
+        repository.save(new Minesweeper("Abacki", 9L));
     }
 
     @Test
     public void givenTopRankRequest_thenReturnsTop10Results() {
-        List<MinesweeperEntity> topRanking = repository.getTopScores();
+        List<Minesweeper> topRanking = repository.getTopScores();
         Assertions.assertEquals(10, topRanking.size());
     }
 
     @Test
     public void givenTopRankRequest_thenBestResultUserNameIsCorrect() {
-        MinesweeperEntity bestResult = repository.getTopScores()
+        Minesweeper bestResult = repository.getTopScores()
                 .stream()
-                .min(Comparator.comparing(MinesweeperEntity::getTime))
+                .min(Comparator.comparing(Minesweeper::getTime))
                 .orElseThrow(RuntimeException::new);
         Assertions.assertEquals("Abacki", bestResult.getUserName());
     }
 
     @Test
     public void givenTopRankRequest_thenWorstResultTimeIsCorrect() {
-        MinesweeperEntity worstResult = repository.getTopScores()
+        Minesweeper worstResult = repository.getTopScores()
                 .stream()
-                .max(Comparator.comparing(MinesweeperEntity::getTime))
+                .max(Comparator.comparing(Minesweeper::getTime))
                 .orElseThrow(RuntimeException::new);
         Assertions.assertEquals(24L, worstResult.getTime());
     }
@@ -74,7 +74,7 @@ public class MinesweeperUnitTest {
     @Test
     public void givenUserTopRankRequest_thenListContainsOnlyRequestedUserResults() {
         String userName = "Abacki";
-        List<MinesweeperEntity> topUserRanking = repository.getTopUserScores(userName)
+        List<Minesweeper> topUserRanking = repository.getTopUserScores(userName)
                 .stream()
                 .filter(result -> !result.getUserName().equals(userName))
                 .collect(Collectors.toList());
@@ -83,24 +83,24 @@ public class MinesweeperUnitTest {
 
     @Test
     public void givenUserTopRankRequest_thenListContainsTop10UserResults() {
-        List<MinesweeperEntity> topUserRanking = repository.getTopUserScores("Abacki");
+        List<Minesweeper> topUserRanking = repository.getTopUserScores("Abacki");
         Assertions.assertEquals(10, topUserRanking.size());
     }
 
     @Test
     public void givenUserTopRankRequest_thenBestUserTimeIsCorrect() {
-        MinesweeperEntity bestResult = repository.getTopUserScores("Abacki")
+        Minesweeper bestResult = repository.getTopUserScores("Abacki")
                 .stream()
-                .min(Comparator.comparing(MinesweeperEntity::getTime))
+                .min(Comparator.comparing(Minesweeper::getTime))
                 .orElseThrow(RuntimeException::new);
         Assertions.assertEquals(9L, bestResult.getTime());
     }
 
     @Test
     public void givenUserTopRankRequest_thenWorstUserTimeIsCorrect() {
-        MinesweeperEntity worstResult = repository.getTopUserScores("Abacki")
+        Minesweeper worstResult = repository.getTopUserScores("Abacki")
                 .stream()
-                .max(Comparator.comparing(MinesweeperEntity::getTime))
+                .max(Comparator.comparing(Minesweeper::getTime))
                 .orElseThrow(RuntimeException::new);
         Assertions.assertEquals(24L, worstResult.getTime());
     }

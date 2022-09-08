@@ -1,6 +1,7 @@
 package com.example.ztiproj.repository;
 
-import com.example.ztiproj.model.MinesweeperEntity;
+import com.example.ztiproj.common.Labels;
+import com.example.ztiproj.model.Minesweeper;
 import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
@@ -14,22 +15,22 @@ import java.util.List;
  * @since 2022-08-09
  */
 @Repository
-public interface MinesweeperRepository extends MongoRepository<MinesweeperEntity, String> {
+public interface MinesweeperRepository extends MongoRepository<Minesweeper, String> {
 
     @Aggregation(pipeline = {
-            "{'$sort': {'time': 1}}",
+            "{'$sort': {'" + Labels.MINESWEEPER_TIME + "': 1}}",
             "{'$limit': 10}"
     })
-    List<MinesweeperEntity> getTopScores();
+    List<Minesweeper> getTopScores();
 
     @Aggregation(pipeline = {
-            "{'$match':{'username': ?0}}",
-            "{'$sort': {'time': 1}}",
+            "{'$match':{'" + Labels.MINESWEEPER_USERNAME + "': ?0}}",
+            "{'$sort': {'" + Labels.MINESWEEPER_TIME + "': 1}}",
             "{'$limit': 10}"
     })
-    List<MinesweeperEntity> getTopUserScores(String userName);
+    List<Minesweeper> getTopUserScores(String userName);
 
-    @Query(value = "{'username' : ?0}", delete = true)
+    @Query(value = "{'" + Labels.MINESWEEPER_USERNAME + "' : ?0}", delete = true)
     void deleteByUserName(String userName);
 
 }

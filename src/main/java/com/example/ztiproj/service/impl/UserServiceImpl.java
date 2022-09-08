@@ -1,5 +1,6 @@
 package com.example.ztiproj.service.impl;
 
+import com.example.ztiproj.common.Labels;
 import com.example.ztiproj.dto.UserDto;
 import com.example.ztiproj.exception.NonExistentUserException;
 import com.example.ztiproj.mapper.UserMapper;
@@ -35,12 +36,12 @@ public class UserServiceImpl implements UserService {
                 .map(mapper::map)
                 .map(repository::save)
                 .map(mapper::map)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid user dto"));
+                .orElseThrow(() -> new IllegalArgumentException(Labels.INVALID_USER_DTO_EXCEPTION_MESSAGE));
     }
 
     public void checkUser(String userName) {
         if (Strings.isNullOrEmpty(userName)) {
-            throw new NonExistentUserException("Empty user name!");
+            throw new NonExistentUserException(Labels.EMPTY_USERNAME_EXCEPTION_MESSAGE);
         }
         UserEntity user = repository.getByUserName(userName);
         if (Objects.isNull(user)) {

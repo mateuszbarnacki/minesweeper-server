@@ -1,6 +1,8 @@
 package com.example.ztiproj.model;
 
 import com.example.ztiproj.common.Labels;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -12,22 +14,21 @@ import org.springframework.data.mongodb.core.mapping.Field;
  * @since 2022-08-06
  */
 @Document(value = Labels.USER_ENTITY)
+@Getter
+@Setter
 public class UserEntity {
     @Id
     private String id;
 
-    @Field(name = "name")
+    @Field(name = Labels.USER_NAME)
     private String name;
 
     @Indexed(name = Labels.USER_ENTITY_INDEX_NAME, unique = true, background = true)
-    @Field(name = "username")
+    @Field(name = Labels.USER_USERNAME)
     private String userName;
 
-    @Field(name = "password")
+    @Field(name = Labels.USER_PASSWORD)
     private String password;
-
-    public UserEntity() {
-    }
 
     public UserEntity(String name, String userName, String password) {
         this.name = name;
@@ -35,35 +36,4 @@ public class UserEntity {
         this.password = password;
     }
 
-    public String getId() {
-        return this.id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getUserName() {
-        return this.userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPassword() {
-        return this.password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }

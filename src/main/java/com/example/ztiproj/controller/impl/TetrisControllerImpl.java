@@ -1,5 +1,6 @@
 package com.example.ztiproj.controller.impl;
 
+import com.example.ztiproj.common.Labels;
 import com.example.ztiproj.controller.api.TetrisController;
 import com.example.ztiproj.dto.TetrisDto;
 import com.example.ztiproj.exception.InvalidTetrisResultException;
@@ -34,7 +35,7 @@ public class TetrisControllerImpl implements TetrisController {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(service.addResult(dto));
         } catch (NullPointerException e) {
-            throw new InvalidTetrisResultException("Null dto provided!");
+            throw new InvalidTetrisResultException(Labels.NULL_DTO_EXCEPTION_MESSAGE);
         }
     }
 

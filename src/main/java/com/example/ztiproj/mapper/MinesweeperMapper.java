@@ -1,7 +1,7 @@
 package com.example.ztiproj.mapper;
 
 import com.example.ztiproj.dto.MinesweeperDto;
-import com.example.ztiproj.model.MinesweeperEntity;
+import com.example.ztiproj.model.Minesweeper;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -13,12 +13,12 @@ import org.springframework.stereotype.Component;
 @Component
 @NoArgsConstructor
 public class MinesweeperMapper {
-    public MinesweeperEntity map(MinesweeperDto dto) {
+    public Minesweeper map(MinesweeperDto dto) {
         Long time = mapDtoToEntityTime(dto.getTime());
-        return new MinesweeperEntity(dto.getUserName(), time);
+        return new Minesweeper(dto.getUserName(), time);
     }
 
-    public MinesweeperDto map(MinesweeperEntity entity) {
+    public MinesweeperDto map(Minesweeper entity) {
         String time = mapEntityToDtoTime(entity.getTime());
         return MinesweeperDto.builder()
                 .userName(entity.getUserName())
