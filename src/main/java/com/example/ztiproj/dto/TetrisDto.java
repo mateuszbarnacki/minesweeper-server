@@ -4,6 +4,8 @@ import lombok.Builder;
 import lombok.NonNull;
 import lombok.Value;
 
+import java.beans.ConstructorProperties;
+
 /**
  * @author Mateusz Barnacki
  * @version 1.0
@@ -15,4 +17,10 @@ import lombok.Value;
 public class TetrisDto {
     String userName;
     Long score;
+
+    @ConstructorProperties({"userName", "score"})
+    public TetrisDto(String userName, Long score) {
+        this.userName = userName;
+        this.score = score;
+    }
 }
