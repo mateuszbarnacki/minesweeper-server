@@ -32,7 +32,6 @@ public class ExceptionHandlingIntegrationTest {
     @Test
     public void shouldReturnMinesweeperBadRequest() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/error/minesweeper"))
-                .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("Null dto provided!"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.status").value("BAD_REQUEST"));
@@ -41,7 +40,6 @@ public class ExceptionHandlingIntegrationTest {
     @Test
     public void shouldReturnSnakeBadRequest() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/error/snake"))
-                .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("Null dto provided!"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.status").value("BAD_REQUEST"));
@@ -50,7 +48,6 @@ public class ExceptionHandlingIntegrationTest {
     @Test
     public void shouldReturnTetrisBadRequest() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/error/tetris"))
-                .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("Null dto provided!"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.status").value("BAD_REQUEST"));
@@ -59,7 +56,6 @@ public class ExceptionHandlingIntegrationTest {
     @Test
     public void shouldReturnUserNotFound() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/error/user-not-found"))
-                .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isNotFound())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("User does not exists!"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.status").value("NOT_FOUND"));

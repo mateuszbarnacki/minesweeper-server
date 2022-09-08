@@ -4,6 +4,8 @@ import lombok.Builder;
 import lombok.NonNull;
 import lombok.Value;
 
+import java.beans.ConstructorProperties;
+
 /**
  * @author Mateusz Barnacki
  * @version 1.0
@@ -15,4 +17,10 @@ import lombok.Value;
 public class MinesweeperDto {
     String userName;
     String time;
+
+    @ConstructorProperties({"userName", "time"})
+    public MinesweeperDto(String userName, String time) {
+        this.userName = userName;
+        this.time = time;
+    }
 }

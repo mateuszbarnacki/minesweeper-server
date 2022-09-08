@@ -8,11 +8,10 @@ import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.assertions.Assertions;
 import org.hamcrest.Matchers;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -21,7 +20,7 @@ import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.web.context.WebApplicationContext;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -37,22 +36,15 @@ import static org.mockito.Mockito.when;
  * @since 2022-08-29
  */
 @RunWith(SpringRunner.class)
-@WebMvcTest(MinesweeperControllerImpl.class)
 @AutoConfigureMockMvc(addFilters = false)
 public class MinesweeperControllerTest {
-
+    private MockMvc mvc;
     @MockBean
     private MinesweeperServiceImpl service;
 
-    @Autowired
-    private WebApplicationContext webApplicationContext;
-
-    @Autowired
-    private MockMvc mvc;
-
-    @Test
-    public void shouldCreateMockMvc() {
-        Assertions.assertNotNull(mvc);
+    @Before
+    public void setUp() {
+        mvc = MockMvcBuilders.standaloneSetup(new MinesweeperControllerImpl(service)).build();
     }
 
     @Test
@@ -100,7 +92,6 @@ public class MinesweeperControllerTest {
                 .content(jsonObject);
 
         mvc.perform(requestBuilder)
-                .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isCreated());
 
         verify(service).addResult(any(MinesweeperDto.class));
