@@ -1,6 +1,7 @@
 package com.example.ztiproj.repository;
 
 import com.example.ztiproj.model.Minesweeper;
+import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,7 +12,6 @@ import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 @RunWith(SpringRunner.class)
 @DataMongoTest
 @TestPropertySource(properties = "spring.mongodb.embedded.version=3.5.5")
-public class MinesweeperUnitTest {
+public class MinesweeperIntegrationTest {
     @Autowired
     private MinesweeperRepository repository;
 
@@ -48,7 +48,7 @@ public class MinesweeperUnitTest {
     }
 
     @Test
-    public void givenTopRankRequest_thenReturnsTop10Results() {
+    public void givenTopRankRequest_thenReturns10Results() {
         List<Minesweeper> topRanking = repository.getTopScores();
         Assertions.assertEquals(10, topRanking.size());
     }
@@ -57,18 +57,22 @@ public class MinesweeperUnitTest {
     public void givenTopRankRequest_thenBestResultUserNameIsCorrect() {
         Minesweeper bestResult = repository.getTopScores()
                 .stream()
-                .min(Comparator.comparing(Minesweeper::getTime))
+                .reduce((first, second) -> first)
                 .orElseThrow(RuntimeException::new);
-        Assertions.assertEquals("Abacki", bestResult.getUserName());
+        AssertionsForClassTypes.assertThat(bestResult)
+                .hasFieldOrPropertyWithValue("userName", "Abacki")
+                .hasFieldOrPropertyWithValue("time", 9L);
     }
 
     @Test
     public void givenTopRankRequest_thenWorstResultTimeIsCorrect() {
         Minesweeper worstResult = repository.getTopScores()
                 .stream()
-                .max(Comparator.comparing(Minesweeper::getTime))
+                .reduce((first, second) -> second)
                 .orElseThrow(RuntimeException::new);
-        Assertions.assertEquals(24L, worstResult.getTime());
+        AssertionsForClassTypes.assertThat(worstResult)
+                .hasFieldOrPropertyWithValue("userName", "Abacki")
+                .hasFieldOrPropertyWithValue("time", 24L);
     }
 
     @Test
@@ -89,20 +93,22 @@ public class MinesweeperUnitTest {
 
     @Test
     public void givenUserTopRankRequest_thenBestUserTimeIsCorrect() {
-        Minesweeper bestResult = repository.getTopUserScores("Abacki")
+        long actual = repository.getTopUserScores("Abacki")
                 .stream()
-                .min(Comparator.comparing(Minesweeper::getTime))
+                .reduce((first, second) -> first)
+                .map(Minesweeper::getTime)
                 .orElseThrow(RuntimeException::new);
-        Assertions.assertEquals(9L, bestResult.getTime());
+        Assertions.assertEquals(9L, actual);
     }
 
     @Test
     public void givenUserTopRankRequest_thenWorstUserTimeIsCorrect() {
-        Minesweeper worstResult = repository.getTopUserScores("Abacki")
+        long actual = repository.getTopUserScores("Abacki")
                 .stream()
-                .max(Comparator.comparing(Minesweeper::getTime))
+                .reduce((first, second) -> second)
+                .map(Minesweeper::getTime)
                 .orElseThrow(RuntimeException::new);
-        Assertions.assertEquals(24L, worstResult.getTime());
+        Assertions.assertEquals(24L, actual);
     }
 
     @Test
