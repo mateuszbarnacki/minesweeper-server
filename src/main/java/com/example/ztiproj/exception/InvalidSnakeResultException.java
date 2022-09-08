@@ -1,5 +1,8 @@
 package com.example.ztiproj.exception;
 
+import com.example.ztiproj.common.Labels;
+import com.example.ztiproj.exception.handler.ErrorCode;
+
 /**
  * @author Mateusz Barnacki
  * @version 1.0
@@ -7,10 +10,10 @@ package com.example.ztiproj.exception;
  */
 public class InvalidSnakeResultException extends ZtiProjException {
     public InvalidSnakeResultException() {
-        super("Invalid snake dto!", 400);
+        super(Labels.INVALID_SNAKE_DTO_EXCEPTION_MESSAGE, ErrorCode.BAD_REQUEST);
     }
 
     public InvalidSnakeResultException(String message) {
-        super(message, 400);
+        super(message, ErrorCode.BAD_REQUEST);
     }
 }

@@ -1,19 +1,21 @@
 package com.example.ztiproj.exception;
 
+import com.example.ztiproj.exception.handler.ErrorCode;
+
 /**
  * @author Mateusz Barnacki
  * @version 1.0
  * @since 2022-08-30
  */
 public class ZtiProjException extends RuntimeException {
-    private final int errorCode;
+    private final ErrorCode errorCode;
 
-    public ZtiProjException(String msg, int errorCode) {
+    public ZtiProjException(String msg, ErrorCode errorCode) {
         super(msg);
         this.errorCode = errorCode;
     }
 
-    public int getErrorCode() {
+    public ErrorCode getErrorCode() {
         return this.errorCode;
     }
 }

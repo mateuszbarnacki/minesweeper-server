@@ -35,7 +35,7 @@ public class ExceptionHandlingIntegrationTest {
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("Null dto provided!"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(400));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.status").value("BAD_REQUEST"));
     }
 
     @Test
@@ -44,7 +44,7 @@ public class ExceptionHandlingIntegrationTest {
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("Null dto provided!"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(400));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.status").value("BAD_REQUEST"));
     }
 
     @Test
@@ -53,7 +53,7 @@ public class ExceptionHandlingIntegrationTest {
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("Null dto provided!"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(400));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.status").value("BAD_REQUEST"));
     }
 
     @Test
@@ -62,6 +62,6 @@ public class ExceptionHandlingIntegrationTest {
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isNotFound())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("User does not exists!"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(404));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.status").value("NOT_FOUND"));
     }
 }

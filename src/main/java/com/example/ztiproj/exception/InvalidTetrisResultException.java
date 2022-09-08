@@ -1,5 +1,8 @@
 package com.example.ztiproj.exception;
 
+import com.example.ztiproj.common.Labels;
+import com.example.ztiproj.exception.handler.ErrorCode;
+
 /**
  * @author Mateusz Barnacki
  * @version 1.0
@@ -7,10 +10,10 @@ package com.example.ztiproj.exception;
  */
 public class InvalidTetrisResultException extends ZtiProjException {
     public InvalidTetrisResultException() {
-        super("Invalid tetris dto!", 400);
+        super(Labels.INVALID_TETRIS_DTO_EXCEPTION_MESSAGE, ErrorCode.BAD_REQUEST);
     }
 
     public InvalidTetrisResultException(String message) {
-        super(message, 400);
+        super(message, ErrorCode.BAD_REQUEST);
     }
 }

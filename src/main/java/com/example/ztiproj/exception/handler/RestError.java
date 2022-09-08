@@ -12,5 +12,5 @@ import lombok.Data;
 @Builder
 public class RestError {
     private String message;
-    private int code;
+    private ErrorCode status;
 }

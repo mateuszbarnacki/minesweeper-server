@@ -47,7 +47,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     private RestError buildErrorMessage(ZtiProjException e) {
         return RestError.builder()
                 .message(e.getMessage())
-                .code(e.getErrorCode())
+                .status(e.getErrorCode())
                 .build();
     }
 }

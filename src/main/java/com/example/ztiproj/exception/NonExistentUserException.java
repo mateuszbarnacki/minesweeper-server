@@ -1,5 +1,7 @@
 package com.example.ztiproj.exception;
 
+import com.example.ztiproj.exception.handler.ErrorCode;
+
 /**
  * @author Mateusz Barnacki
  * @version 1.0
@@ -7,6 +9,6 @@ package com.example.ztiproj.exception;
  */
 public class NonExistentUserException extends ZtiProjException {
     public NonExistentUserException(String message) {
-        super(message, 404);
+        super(message, ErrorCode.NOT_FOUND);
     }
 }
