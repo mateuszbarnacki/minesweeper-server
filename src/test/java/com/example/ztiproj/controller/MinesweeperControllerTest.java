@@ -50,7 +50,7 @@ public class MinesweeperControllerTest {
     @Test
     public void shouldReturnListOfResults() throws Exception {
         when(service.getRanking())
-                .thenReturn(List.of(MinesweeperDto.builder().userName("matib").time("00:04:13").build()));
+                .thenReturn(List.of(MinesweeperDto.builder().userName("matib").time(13L).build()));
 
         mvc.perform(MockMvcRequestBuilders.get("/minesweeper")
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
@@ -58,28 +58,28 @@ public class MinesweeperControllerTest {
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.size()", Matchers.is(1)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].userName").value("matib"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].time").value("00:04:13"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].time").value(13L));
     }
 
     @Test
     public void shouldReturnUserListOfResults() throws Exception {
         String userName = "matib";
         when(service.getUserRanking(userName))
-                .thenReturn(List.of(MinesweeperDto.builder().userName(userName).time("00:13:04").build()));
+                .thenReturn(List.of(MinesweeperDto.builder().userName(userName).time(4L).build()));
 
         mvc.perform(MockMvcRequestBuilders.get("/minesweeper/{username}", userName))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.size()", Matchers.is(1)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].userName").value(userName))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].time").value("00:13:04"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].time").value(4L));
     }
 
     @Test
     public void shouldAddResult() throws Exception {
         Object object = new Object() {
             private final String userName = "matib";
-            private final String time = "00:04:13";
+            private final Long time = 413L;
         };
 
         ObjectMapper objectMapper = new ObjectMapper();

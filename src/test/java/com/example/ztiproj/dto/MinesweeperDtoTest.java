@@ -24,7 +24,7 @@ public class MinesweeperDtoTest {
     public void setup() {
         this.minesweeperDto = MinesweeperDto.builder()
                 .userName("matib")
-                .time("00:04:13")
+                .time(134L)
                 .build();
     }
 
@@ -32,6 +32,6 @@ public class MinesweeperDtoTest {
     public void shouldContainUserNameAndTime() {
         Assertions.assertThat(minesweeperDto)
                 .hasFieldOrPropertyWithValue("userName", "matib")
-                .hasFieldOrPropertyWithValue("time", "00:04:13");
+                .hasFieldOrPropertyWithValue("time", 134L);
     }
 }

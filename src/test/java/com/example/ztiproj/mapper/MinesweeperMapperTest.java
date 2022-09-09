@@ -34,14 +34,14 @@ public class MinesweeperMapperTest {
         MinesweeperDto dto = this.minesweeperMapper.map(entity);
 
         assertThat(dto).hasFieldOrPropertyWithValue("userName", "Matib")
-                .hasFieldOrPropertyWithValue("time", "00:12:57");
+                .hasFieldOrPropertyWithValue("time", 777L);
     }
 
     @Test
     public void shouldMapDtoToEntity() {
         MinesweeperDto dto = MinesweeperDto.builder()
                 .userName("matib")
-                .time("00:04:13")
+                .time(253L)
                 .build();
 
         Minesweeper entity = this.minesweeperMapper.map(dto);

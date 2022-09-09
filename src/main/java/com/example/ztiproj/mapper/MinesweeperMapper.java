@@ -14,38 +14,13 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 public class MinesweeperMapper {
     public Minesweeper map(MinesweeperDto dto) {
-        Long time = mapDtoToEntityTime(dto.getTime());
-        return new Minesweeper(dto.getUserName(), time);
+        return new Minesweeper(dto.getUserName(), dto.getTime());
     }
 
     public MinesweeperDto map(Minesweeper entity) {
-        String time = mapEntityToDtoTime(entity.getTime());
         return MinesweeperDto.builder()
                 .userName(entity.getUserName())
-                .time(time)
+                .time(entity.getTime())
                 .build();
-    }
-
-    private Long mapDtoToEntityTime(String time) {
-        String[] timeElements = time.split(":");
-        int multiplier = 1;
-        long timeInSeconds = 0L;
-        for (int i = 2; i >= 0; i--) {
-            timeInSeconds += (Long.parseLong(timeElements[i]) * multiplier);
-            multiplier *= 60;
-        }
-        return timeInSeconds;
-    }
-
-    private String mapEntityToDtoTime(long time) {
-        String seconds = String.valueOf(time % 60);
-        String minutes = String.valueOf(time / 60);
-        String hours = String.valueOf(time / 3600);
-
-        if (hours.length() == 1) {
-            hours = "0" + hours;
-        }
-
-        return hours + ":" + minutes + ":" + seconds;
     }
 }

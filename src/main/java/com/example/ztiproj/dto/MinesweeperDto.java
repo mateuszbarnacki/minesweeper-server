@@ -16,10 +16,10 @@ import java.beans.ConstructorProperties;
 @NonNull
 public class MinesweeperDto {
     String userName;
-    String time;
+    Long time;
 
     @ConstructorProperties({"userName", "time"})
-    public MinesweeperDto(String userName, String time) {
+    public MinesweeperDto(String userName, Long time) {
         this.userName = userName;
         this.time = time;
     }
