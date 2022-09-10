@@ -2,6 +2,7 @@ package com.example.ztiproj.dto;
 
 import lombok.Builder;
 import lombok.NonNull;
+import lombok.ToString;
 import lombok.Value;
 
 import java.beans.ConstructorProperties;
@@ -14,6 +15,7 @@ import java.beans.ConstructorProperties;
 @Value
 @Builder
 @NonNull
+@ToString
 public class TetrisDto {
     String userName;
     Long score;

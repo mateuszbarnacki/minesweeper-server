@@ -3,6 +3,7 @@ package com.example.ztiproj.model;
 import com.example.ztiproj.common.Labels;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -16,6 +17,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Document(value = Labels.MINESWEEPER_ENTITY)
 @Getter
 @Setter
+@ToString
 public class Minesweeper {
     @Id
     private String id;

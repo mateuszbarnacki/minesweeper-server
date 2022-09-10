@@ -49,7 +49,7 @@ public interface SnakeController {
     ResponseEntity<SnakeDto> addResult(@RequestBody SnakeDto dto);
 
     @DeleteMapping("/{username}")
-    @ApiOperation(hidden = true, value = "Delete result", notes = "Method deletes all user results.")
+    @ApiOperation(value = "Delete result", notes = "Method deletes all user results.")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "All user results deleted successfully"),
             @ApiResponse(code = 404, message = "User not found"),
