@@ -1,0 +1,49 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="zti-proj:war exploded">
+    <output-path>$PROJECT_DIR$/target/zti-proj-1.0</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <exploded>true</exploded>
+        <module>zti-proj</module>
+        <packaging>war</packaging>
+        <unpackNestedArchives>false</unpackNestedArchives>
+      </options>
+    </properties>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="zti-proj" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: org.eclipse.jnosql.artemis:artemis-document:1.0.0-b1" />
+          <element id="library" level="project" name="Maven: org.eclipse.jnosql.diana:diana-document:1.0.0-b1" />
+          <element id="library" level="project" name="Maven: org.eclipse.jnosql.diana:diana-core:1.0.0-b1" />
+          <element id="library" level="project" name="Maven: jakarta.nosql.communication:communication-core:1.0.0-b1" />
+          <element id="library" level="project" name="Maven: org.eclipse.jnosql.diana:diana-query:1.0.0-b1" />
+          <element id="library" level="project" name="Maven: org.antlr:antlr4-runtime:4.7.2" />
+          <element id="library" level="project" name="Maven: jakarta.nosql.communication:communication-query:1.0.0-b1" />
+          <element id="library" level="project" name="Maven: jakarta.nosql.communication:communication-document:1.0.0-b1" />
+          <element id="library" level="project" name="Maven: org.eclipse.jnosql.artemis:artemis-core:1.0.0-b1" />
+          <element id="library" level="project" name="Maven: jakarta.nosql.mapping:mapping-core:1.0.0-b1" />
+          <element id="library" level="project" name="Maven: jakarta.nosql.mapping:mapping-document:1.0.0-b1" />
+          <element id="library" level="project" name="Maven: org.eclipse.jnosql.artemis:artemis-key-value:1.0.0-b1" />
+          <element id="library" level="project" name="Maven: org.eclipse.jnosql.diana:diana-key-value:1.0.0-b1" />
+          <element id="library" level="project" name="Maven: jakarta.nosql.communication:communication-key-value:1.0.0-b1" />
+          <element id="library" level="project" name="Maven: jakarta.nosql.mapping:mapping-key-value:1.0.0-b1" />
+          <element id="library" level="project" name="Maven: org.eclipse.jnosql.diana:mongodb-driver:1.0.0-b1" />
+          <element id="library" level="project" name="Maven: org.eclipse.jnosql.diana:diana-driver-commons:1.0.0-b1" />
+          <element id="library" level="project" name="Maven: org.mongodb:mongo-java-driver:3.10.2" />
+          <element id="library" level="project" name="Maven: org.mongodb:mongodb-driver-async:3.10.2" />
+          <element id="library" level="project" name="Maven: org.mongodb:bson:3.10.2" />
+          <element id="library" level="project" name="Maven: org.mongodb:mongodb-driver-core:3.10.2" />
+          <element id="library" level="project" name="Maven: org.eclipse.microprofile.openapi:microprofile-openapi-api:3.0" />
+          <element id="library" level="project" name="Maven: org.microprofile-ext.openapi-ext:openapi-ui:1.1.5" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/target/zti-proj-1.0/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="zti-proj/web/Web" />
+    </root>
+  </artifact>
+</component>
