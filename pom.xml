@@ -10,7 +10,7 @@
         <version>3.0.2</version>
     </parent>
 
-    <groupId>com.example.ztiproj</groupId>
+    <groupId>com.example.zti-proj</groupId>
     <artifactId>zti-proj</artifactId>
     <version>1.0</version>
     <name>zti-service</name>
