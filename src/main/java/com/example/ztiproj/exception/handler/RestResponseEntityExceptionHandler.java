@@ -1,9 +1,6 @@
 package com.example.ztiproj.exception.handler;
 
 import com.example.ztiproj.exception.InvalidMinesweeperResultException;
-import com.example.ztiproj.exception.InvalidSnakeResultException;
-import com.example.ztiproj.exception.InvalidTetrisResultException;
-import com.example.ztiproj.exception.NonExistentUserException;
 import com.example.ztiproj.exception.ZtiProjException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,24 +21,6 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<RestError> handleInvalidMinesweeperResultException(InvalidMinesweeperResultException e) {
         return new ResponseEntity<>(buildErrorMessage(e), HttpStatus.BAD_REQUEST);
-    }
-
-    @ExceptionHandler({InvalidSnakeResultException.class})
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<RestError> handleInvalidSnakeResultException(InvalidSnakeResultException e) {
-        return new ResponseEntity<>(buildErrorMessage(e), HttpStatus.BAD_REQUEST);
-    }
-
-    @ExceptionHandler({InvalidTetrisResultException.class})
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<RestError> handleInvalidTetrisResultException(InvalidTetrisResultException e) {
-        return new ResponseEntity<>(buildErrorMessage(e), HttpStatus.BAD_REQUEST);
-    }
-
-    @ExceptionHandler({NonExistentUserException.class})
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseEntity<RestError> handleNonExistentUserException(NonExistentUserException e) {
-        return new ResponseEntity<>(buildErrorMessage(e), HttpStatus.NOT_FOUND);
     }
 
     private RestError buildErrorMessage(ZtiProjException e) {
