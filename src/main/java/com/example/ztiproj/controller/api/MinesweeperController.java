@@ -1,9 +1,12 @@
 package com.example.ztiproj.controller.api;
 
+import com.example.ztiproj.common.Labels;
 import com.example.ztiproj.dto.MinesweeperDto;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,39 +24,58 @@ import java.util.List;
  * @since 2022-08-09
  */
 @RequestMapping("/minesweeper")
+@Tag(name = "Minesweeper")
 public interface MinesweeperController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Get overall ranking", notes = "Method returns the ranking of top 10 results.")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "All results returned successfully"),
-            @ApiResponse(code = 404, message = "User not found"),
-            @ApiResponse(code = 500, message = "Server crashed")})
+    @Operation(summary = "Get overall ranking",
+            description = "Method returns the ranking of top 10 results.",
+    responses = {
+            @ApiResponse(responseCode = "200", description = "All results returned successfully")})
     ResponseEntity<List<MinesweeperDto>> getRanking();
 
     @GetMapping(path = "/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Get ranking for user", notes = "Method returns the top results for user" +
-            " specified in username parameter. Ranking contains up to 10 results.")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "All user results returned successfully"),
-            @ApiResponse(code = 404, message = "User not found"),
-            @ApiResponse(code = 500, message = "Server crashed")})
+    @Operation(summary = "Get ranking for user",
+            description = "Method returns the top results for user specified in username parameter. Ranking contains up to 10 results.",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "All user results returned successfully"),
+                    @ApiResponse(
+                            responseCode = "404",
+                            description = "Invalid username",
+                            content = @Content(
+                                    examples = {@ExampleObject(
+                                            value = "{\"message\":\"" + Labels.INVALID_MINESWEEPER_DTO_EXCEPTION_MESSAGE + "\", \"status\":\"BAD_REQUEST\"}"
+                                    )},
+                                    mediaType = MediaType.APPLICATION_JSON_VALUE))})
     ResponseEntity<List<MinesweeperDto>> getUserRanking(@PathVariable("username") String username);
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Add result", notes = "Method add the result to database.")
-    @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "Result successfully added"),
-            @ApiResponse(code = 404, message = "Result not found"),
-            @ApiResponse(code = 500, message = "Server crashed")})
+    @Operation(summary = "Add result",
+            description = "Method add the result to database.",
+            responses = {
+                    @ApiResponse(responseCode = "201", description = "Result successfully added"),
+                    @ApiResponse(
+                            responseCode = "404",
+                            description = "Invalid dto!",
+                            content = @Content(
+                                    examples = {@ExampleObject(
+                                            value = "{\"message\":\"" + Labels.INVALID_MINESWEEPER_DTO_EXCEPTION_MESSAGE + "\", \"status\":\"BAD_REQUEST\"}"
+                                    )},
+                                    mediaType = MediaType.APPLICATION_JSON_VALUE))})
     ResponseEntity<MinesweeperDto> addResult(@RequestBody MinesweeperDto dto);
 
     @DeleteMapping("/{username}")
-    @ApiOperation(value = "Delete result", notes = "Method deletes all user results.")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "All user results deleted successfully"),
-            @ApiResponse(code = 404, message = "User not found"),
-            @ApiResponse(code = 500, message = "Server crashed")})
+    @Operation(summary = "Delete result",
+            description = "Method deletes all user results.",
+            responses = {
+                    @ApiResponse(responseCode = "204", description = "All user results deleted successfully"),
+                    @ApiResponse(
+                            responseCode = "404",
+                            description = "Invalid username",
+                            content = @Content(
+                                    examples = {@ExampleObject(
+                                            value = "{\"message\":\"" + Labels.INVALID_MINESWEEPER_DTO_EXCEPTION_MESSAGE + "\", \"status\":\"BAD_REQUEST\"}"
+                                    )},
+                                    mediaType = MediaType.APPLICATION_JSON_VALUE))})
     void deleteAllUserResults(@PathVariable("username") String username);
-
 }
