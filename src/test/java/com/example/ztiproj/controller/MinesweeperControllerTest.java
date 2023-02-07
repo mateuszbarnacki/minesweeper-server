@@ -7,13 +7,12 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Matchers;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -34,20 +33,20 @@ import static org.mockito.Mockito.when;
  * @version 1.0
  * @since 2022-08-29
  */
-@RunWith(SpringRunner.class)
+@SpringBootTest
 @AutoConfigureMockMvc(addFilters = false)
-public class MinesweeperControllerTest {
+class MinesweeperControllerTest {
     private MockMvc mvc;
     @MockBean
     private MinesweeperServiceImpl service;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         mvc = MockMvcBuilders.standaloneSetup(new MinesweeperControllerImpl(service)).build();
     }
 
     @Test
-    public void shouldReturnListOfResults() throws Exception {
+    void shouldReturnListOfResults() throws Exception {
         when(service.getRanking())
                 .thenReturn(List.of(MinesweeperDto.builder().userName("matib").time(13L).build()));
 
@@ -61,7 +60,7 @@ public class MinesweeperControllerTest {
     }
 
     @Test
-    public void shouldReturnUserListOfResults() throws Exception {
+    void shouldReturnUserListOfResults() throws Exception {
         String userName = "matib";
         when(service.getUserRanking(userName))
                 .thenReturn(List.of(MinesweeperDto.builder().userName(userName).time(4L).build()));
@@ -75,7 +74,7 @@ public class MinesweeperControllerTest {
     }
 
     @Test
-    public void shouldAddResult() throws Exception {
+    void shouldAddResult() throws Exception {
         Object object = new Object() {
             private final String userName = "matib";
             private final Long time = 413L;
@@ -97,7 +96,7 @@ public class MinesweeperControllerTest {
     }
 
     @Test
-    public void shouldReturn400StatusCode() throws Exception {
+    void shouldReturn400StatusCode() throws Exception {
         mvc.perform(MockMvcRequestBuilders.post("/minesweeper")
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(MockMvcResultHandlers.print())
@@ -105,7 +104,7 @@ public class MinesweeperControllerTest {
     }
 
     @Test
-    public void shouldAllUserResultsBeDeleted() throws Exception {
+    void shouldAllUserResultsBeDeleted() throws Exception {
         mvc.perform(MockMvcRequestBuilders.delete("/minesweeper/{username}", "matib"))
                 .andExpect(MockMvcResultMatchers.status().isOk());
 

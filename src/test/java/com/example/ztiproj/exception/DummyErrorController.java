@@ -19,19 +19,4 @@ public class DummyErrorController {
     public ResponseEntity<RestError> dummyMinesweeperController() {
         throw new InvalidMinesweeperResultException("Null dto provided!");
     }
-
-    @GetMapping("/snake")
-    public ResponseEntity<RestError> dummySnakeController() {
-        throw new InvalidSnakeResultException("Null dto provided!");
-    }
-
-    @GetMapping("/tetris")
-    public ResponseEntity<RestError> dummyTetrisController() {
-        throw new InvalidTetrisResultException("Null dto provided!");
-    }
-
-    @GetMapping("/user-not-found")
-    public ResponseEntity<RestError> dummyUserNotFoundController() {
-        throw new NonExistentUserException("User does not exists!");
-    }
 }

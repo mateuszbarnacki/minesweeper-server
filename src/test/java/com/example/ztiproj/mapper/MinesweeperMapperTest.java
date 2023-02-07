@@ -2,13 +2,9 @@ package com.example.ztiproj.mapper;
 
 import com.example.ztiproj.dto.MinesweeperDto;
 import com.example.ztiproj.model.Minesweeper;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
-import org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -17,16 +13,14 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @version 1.0
  * @since 2022-08-27
  */
-@RunWith(SpringRunner.class)
 @SpringBootTest
-@ImportAutoConfiguration(exclude = EmbeddedMongoAutoConfiguration.class)
-public class MinesweeperMapperTest {
+class MinesweeperMapperTest {
 
     @Autowired
     private MinesweeperMapper minesweeperMapper;
 
     @Test
-    public void shouldMapEntityToDto() {
+    void shouldMapEntityToDto() {
         Minesweeper entity = new Minesweeper();
         entity.setUserName("Matib");
         entity.setTime(777L);
@@ -38,7 +32,7 @@ public class MinesweeperMapperTest {
     }
 
     @Test
-    public void shouldMapDtoToEntity() {
+    void shouldMapDtoToEntity() {
         MinesweeperDto dto = MinesweeperDto.builder()
                 .userName("matib")
                 .time(253L)

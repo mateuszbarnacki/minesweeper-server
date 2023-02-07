@@ -2,15 +2,12 @@ package com.example.ztiproj.repository;
 
 import com.example.ztiproj.model.Minesweeper;
 import org.assertj.core.api.AssertionsForClassTypes;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,14 +17,12 @@ import java.util.stream.Collectors;
  * @version 1.0
  * @since 2022-08-27
  */
-@RunWith(SpringRunner.class)
 @DataMongoTest
-@TestPropertySource(properties = "spring.mongodb.embedded.version=3.5.5")
-public class MinesweeperIntegrationTest {
+class MinesweeperIntegrationTest {
     @Autowired
     private MinesweeperRepository repository;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         repository.save(new Minesweeper("Abacki", 10L));
         repository.save(new Minesweeper("Abacki", 52L));
@@ -48,13 +43,13 @@ public class MinesweeperIntegrationTest {
     }
 
     @Test
-    public void givenTopRankRequest_thenReturns10Results() {
+    void givenTopRankRequest_thenReturns10Results() {
         List<Minesweeper> topRanking = repository.getTopScores();
         Assertions.assertEquals(10, topRanking.size());
     }
 
     @Test
-    public void givenTopRankRequest_thenBestResultUserNameIsCorrect() {
+    void givenTopRankRequest_thenBestResultUserNameIsCorrect() {
         Minesweeper bestResult = repository.getTopScores()
                 .stream()
                 .reduce((first, second) -> first)
@@ -65,7 +60,7 @@ public class MinesweeperIntegrationTest {
     }
 
     @Test
-    public void givenTopRankRequest_thenWorstResultTimeIsCorrect() {
+    void givenTopRankRequest_thenWorstResultTimeIsCorrect() {
         Minesweeper worstResult = repository.getTopScores()
                 .stream()
                 .reduce((first, second) -> second)
@@ -76,7 +71,7 @@ public class MinesweeperIntegrationTest {
     }
 
     @Test
-    public void givenUserTopRankRequest_thenListContainsOnlyRequestedUserResults() {
+    void givenUserTopRankRequest_thenListContainsOnlyRequestedUserResults() {
         String userName = "Abacki";
         List<Minesweeper> topUserRanking = repository.getTopUserScores(userName)
                 .stream()
@@ -86,13 +81,13 @@ public class MinesweeperIntegrationTest {
     }
 
     @Test
-    public void givenUserTopRankRequest_thenListContainsTop10UserResults() {
+    void givenUserTopRankRequest_thenListContainsTop10UserResults() {
         List<Minesweeper> topUserRanking = repository.getTopUserScores("Abacki");
         Assertions.assertEquals(10, topUserRanking.size());
     }
 
     @Test
-    public void givenUserTopRankRequest_thenBestUserTimeIsCorrect() {
+    void givenUserTopRankRequest_thenBestUserTimeIsCorrect() {
         long actual = repository.getTopUserScores("Abacki")
                 .stream()
                 .reduce((first, second) -> first)
@@ -102,7 +97,7 @@ public class MinesweeperIntegrationTest {
     }
 
     @Test
-    public void givenUserTopRankRequest_thenWorstUserTimeIsCorrect() {
+    void givenUserTopRankRequest_thenWorstUserTimeIsCorrect() {
         long actual = repository.getTopUserScores("Abacki")
                 .stream()
                 .reduce((first, second) -> second)
@@ -112,7 +107,7 @@ public class MinesweeperIntegrationTest {
     }
 
     @Test
-    public void givenUserName_whenDeleteAllUserResults_thenRankingHasCorrectSize() {
+    void givenUserName_whenDeleteAllUserResults_thenRankingHasCorrectSize() {
         String userName = "Abacki";
         long expectedResult = repository.findAll().stream()
                 .filter(result -> !result.getUserName().equals(userName))
@@ -122,7 +117,7 @@ public class MinesweeperIntegrationTest {
         Assertions.assertEquals(expectedResult, actualResult);
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         repository.deleteByUserName("Abacki");
         repository.deleteByUserName("Babacki");
