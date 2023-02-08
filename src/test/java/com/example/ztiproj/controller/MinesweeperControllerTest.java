@@ -7,18 +7,17 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Matchers;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -27,25 +26,22 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 
 /**
  * @author Mateusz Barnacki
  * @version 1.0
  * @since 2022-08-29
  */
-@SpringBootTest
-@AutoConfigureMockMvc(addFilters = false)
+@WebMvcTest({MinesweeperControllerImpl.class})
 class MinesweeperControllerTest {
+    @Autowired
     private MockMvc mvc;
     @MockBean
     private MinesweeperServiceImpl service;
 
-    @BeforeEach
-    public void setUp() {
-        mvc = MockMvcBuilders.standaloneSetup(new MinesweeperControllerImpl(service)).build();
-    }
-
     @Test
+    @WithMockUser
     void shouldReturnListOfResults() throws Exception {
         when(service.getRanking())
                 .thenReturn(List.of(new MinesweeperDto("matib", 13L)));
@@ -60,6 +56,7 @@ class MinesweeperControllerTest {
     }
 
     @Test
+    @WithMockUser
     void shouldReturnUserListOfResults() throws Exception {
         String userName = "matib";
         when(service.getUserRanking(userName))
@@ -74,6 +71,7 @@ class MinesweeperControllerTest {
     }
 
     @Test
+    @WithMockUser
     void shouldAddResult() throws Exception {
         Object object = new Object() {
             private final String userName = "matib";
@@ -85,6 +83,7 @@ class MinesweeperControllerTest {
         String jsonObject = objectMapper.writeValueAsString(object);
 
         RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/minesweeper")
+                .with(csrf())
                 .characterEncoding(StandardCharsets.UTF_8)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(jsonObject);
@@ -96,16 +95,20 @@ class MinesweeperControllerTest {
     }
 
     @Test
+    @WithMockUser
     void shouldReturn400StatusCode() throws Exception {
         mvc.perform(MockMvcRequestBuilders.post("/minesweeper")
+                        .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
 
     @Test
+    @WithMockUser
     void shouldAllUserResultsBeDeleted() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.delete("/minesweeper/{username}", "matib"))
+        mvc.perform(MockMvcRequestBuilders.delete("/minesweeper/{username}", "matib")
+                        .with(csrf()))
                 .andExpect(MockMvcResultMatchers.status().isOk());
 
         verify(service).deleteAllUserResults(anyString());
