@@ -16,10 +16,7 @@ class MinesweeperDtoTest {
 
     @BeforeEach
     public void setup() {
-        this.minesweeperDto = MinesweeperDto.builder()
-                .userName("matib")
-                .time(134L)
-                .build();
+        this.minesweeperDto = new MinesweeperDto("matib", 134L);
     }
 
     @Test

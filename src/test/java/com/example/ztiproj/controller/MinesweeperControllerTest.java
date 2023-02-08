@@ -48,7 +48,7 @@ class MinesweeperControllerTest {
     @Test
     void shouldReturnListOfResults() throws Exception {
         when(service.getRanking())
-                .thenReturn(List.of(MinesweeperDto.builder().userName("matib").time(13L).build()));
+                .thenReturn(List.of(new MinesweeperDto("matib", 13L)));
 
         mvc.perform(MockMvcRequestBuilders.get("/minesweeper")
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
@@ -63,7 +63,7 @@ class MinesweeperControllerTest {
     void shouldReturnUserListOfResults() throws Exception {
         String userName = "matib";
         when(service.getUserRanking(userName))
-                .thenReturn(List.of(MinesweeperDto.builder().userName(userName).time(4L).build()));
+                .thenReturn(List.of(new MinesweeperDto(userName, 4L)));
 
         mvc.perform(MockMvcRequestBuilders.get("/minesweeper/{username}", userName))
                 .andExpect(MockMvcResultMatchers.status().isOk())

@@ -33,10 +33,7 @@ class MinesweeperMapperTest {
 
     @Test
     void shouldMapDtoToEntity() {
-        MinesweeperDto dto = MinesweeperDto.builder()
-                .userName("matib")
-                .time(253L)
-                .build();
+        MinesweeperDto dto = new MinesweeperDto("matib", 253L);
 
         Minesweeper entity = this.minesweeperMapper.map(dto);
 

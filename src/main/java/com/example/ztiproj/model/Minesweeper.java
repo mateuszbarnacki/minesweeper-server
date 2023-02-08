@@ -1,9 +1,6 @@
 package com.example.ztiproj.model;
 
 import com.example.ztiproj.common.Labels;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -15,9 +12,6 @@ import org.springframework.data.mongodb.core.mapping.Field;
  * @since 2022-08-06
  */
 @Document(value = Labels.MINESWEEPER_ENTITY)
-@Getter
-@Setter
-@ToString
 public class Minesweeper {
     @Id
     private String id;
@@ -32,9 +26,40 @@ public class Minesweeper {
     public Minesweeper() {
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public Long getTime() {
+        return time;
+    }
+
+    public void setTime(Long time) {
+        this.time = time;
+    }
+
     public Minesweeper(String userName, Long time) {
         this.userName = userName;
         this.time = time;
     }
 
+    @Override
+    public String toString() {
+        return "Minesweeper{" +
+                "userName='" + userName + '\'' +
+                ", time=" + time +
+                '}';
+    }
 }

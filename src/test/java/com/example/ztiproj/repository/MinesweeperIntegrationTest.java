@@ -7,17 +7,16 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author Mateusz Barnacki
  * @version 1.0
  * @since 2022-08-27
  */
-@DataMongoTest
+@SpringBootTest
 class MinesweeperIntegrationTest {
     @Autowired
     private MinesweeperRepository repository;
@@ -76,7 +75,7 @@ class MinesweeperIntegrationTest {
         List<Minesweeper> topUserRanking = repository.getTopUserScores(userName)
                 .stream()
                 .filter(result -> !result.getUserName().equals(userName))
-                .collect(Collectors.toList());
+                .toList();
         Assertions.assertTrue(topUserRanking.isEmpty());
     }
 

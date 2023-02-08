@@ -1,28 +1,12 @@
 package com.example.ztiproj.dto;
 
-import lombok.Builder;
-import lombok.NonNull;
-import lombok.ToString;
-import lombok.Value;
-
-import java.beans.ConstructorProperties;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * @author Mateusz Barnacki
  * @version 1.0
  * @since 2022-08-06
  */
-@Value
-@Builder
-@NonNull
-@ToString
-public class MinesweeperDto {
-    String userName;
-    Long time;
-
-    @ConstructorProperties({"userName", "time"})
-    public MinesweeperDto(String userName, Long time) {
-        this.userName = userName;
-        this.time = time;
-    }
+public record MinesweeperDto(@NotBlank String userName, @NotNull Long time) {
 }

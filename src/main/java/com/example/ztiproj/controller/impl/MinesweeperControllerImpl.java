@@ -5,7 +5,6 @@ import com.example.ztiproj.controller.api.MinesweeperController;
 import com.example.ztiproj.dto.MinesweeperDto;
 import com.example.ztiproj.exception.InvalidMinesweeperResultException;
 import com.example.ztiproj.service.api.MinesweeperService;
-import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,9 +17,12 @@ import java.util.List;
  * @since 2022-08-09
  */
 @RestController
-@AllArgsConstructor
 public class MinesweeperControllerImpl implements MinesweeperController {
     private final MinesweeperService service;
+
+    public MinesweeperControllerImpl(MinesweeperService service) {
+        this.service = service;
+    }
 
     @Override
     public ResponseEntity<List<MinesweeperDto>> getRanking() {
