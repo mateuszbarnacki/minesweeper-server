@@ -34,8 +34,8 @@ public class SecurityConfig {
     @Bean
     public InMemoryUserDetailsManager createUser() {
         return new InMemoryUserDetailsManager(
-                User.withUsername("matib")
-                        .password("{noop}password")
+                User.withUsername("user")
+                        .password("{noop}user")
                         .authorities("read")
                         .build()
         );

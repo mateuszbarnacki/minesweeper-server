@@ -1,4 +1,4 @@
-package com.example.ztiproj.service.impl;
+package com.example.ztiproj.service;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -11,11 +11,16 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.stream.Collectors;
 
+/**
+ * @author Mateusz Barnacki
+ * @version 1.0
+ * @since 2023-02-08
+ */
 @Service
-public class TokenService {
+public class RestTokenService implements TokenService {
     private final JwtEncoder jwtEncoder;
 
-    public TokenService(JwtEncoder jwtEncoder) {
+    public RestTokenService(JwtEncoder jwtEncoder) {
         this.jwtEncoder = jwtEncoder;
     }
 
@@ -31,6 +36,6 @@ public class TokenService {
                 .subject(authentication.getName())
                 .claim("scope", scope)
                 .build();
-        return this.jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
+        return jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
     }
 }

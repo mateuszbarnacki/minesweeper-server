@@ -1,14 +1,13 @@
-package com.example.ztiproj.service.impl;
+package com.example.ztiproj.service;
 
 import com.example.ztiproj.dto.MinesweeperDto;
-import com.example.ztiproj.exception.InvalidMinesweeperResultException;
 import com.example.ztiproj.mapper.MinesweeperMapper;
+import com.example.ztiproj.model.Minesweeper;
 import com.example.ztiproj.repository.MinesweeperRepository;
-import com.example.ztiproj.service.api.MinesweeperService;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.Collection;
 
 /**
  * @author Mateusz Barnacki
@@ -16,35 +15,33 @@ import java.util.Optional;
  * @since 2022-08-11
  */
 @Service
-public class MinesweeperServiceImpl implements MinesweeperService {
+public class RestMinesweeperService implements MinesweeperService {
     private final MinesweeperRepository repository;
     private final MinesweeperMapper mapper;
 
-    public MinesweeperServiceImpl(MinesweeperRepository repository, MinesweeperMapper mapper) {
+    public RestMinesweeperService(MinesweeperRepository repository, MinesweeperMapper mapper) {
         this.repository = repository;
         this.mapper = mapper;
     }
 
-    public List<MinesweeperDto> getRanking() {
+    public Collection<MinesweeperDto> getRanking() {
         return repository.getTopScores()
                 .stream()
                 .map(mapper::map)
                 .toList();
     }
 
-    public List<MinesweeperDto> getUserRanking(String userName) {
+    public Collection<MinesweeperDto> getUserRanking(String userName) {
         return repository.getTopUserScores(userName)
                 .stream()
                 .map(mapper::map)
                 .toList();
     }
 
-    public MinesweeperDto addResult(MinesweeperDto minesweeperDto) {
-        return Optional.ofNullable(minesweeperDto)
-                .map(mapper::map)
-                .map(repository::save)
-                .map(mapper::map)
-                .orElseThrow(InvalidMinesweeperResultException::new);
+    public MinesweeperDto addResult(@NotNull MinesweeperDto minesweeperDto) {
+        Minesweeper result = mapper.map(minesweeperDto);
+        Minesweeper saved = repository.save(result);
+        return mapper.map(saved);
     }
 
     public void deleteAllUserResults(String userName) {

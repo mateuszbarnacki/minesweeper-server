@@ -1,8 +1,8 @@
-package com.example.ztiproj.service.api;
+package com.example.ztiproj.service;
 
 import com.example.ztiproj.dto.MinesweeperDto;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  * @author Mateusz Barnacki
@@ -14,17 +14,17 @@ public interface MinesweeperService {
     /**
      * This method is used to retrieve the best game results.
      *
-     * @return List<MinesweeperDto> This is the list of the best results.
+     * @return Collection<MinesweeperDto> This is the collection of the best results.
      */
-    List<MinesweeperDto> getRanking();
+    Collection<MinesweeperDto> getRanking();
 
     /**
      * This method is used to retrieve 10 best user results.
      *
      * @param userName This is the public name of the user, which is used to retrieve results.
-     * @return List<MinesweeperDto> This is the list of the best user results.
+     * @return Collection<MinesweeperDto> This is the Collection of the best user results.
      */
-    List<MinesweeperDto> getUserRanking(String userName);
+    Collection<MinesweeperDto> getUserRanking(String userName);
 
     /**
      * This method is used to add result to the database.

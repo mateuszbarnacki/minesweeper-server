@@ -1,6 +1,7 @@
-package com.example.ztiproj.controller.impl;
+package com.example.ztiproj.controller;
 
-import com.example.ztiproj.service.impl.TokenService;
+import com.example.ztiproj.service.TokenService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
@@ -19,6 +20,7 @@ public class AuthController {
     }
 
     @PostMapping
+    @Operation(hidden = true)
     public String createToken(Authentication authentication) {
         log.debug("Token requested for user: '{}'", authentication.getName());
         String token = tokenService.generateToken(authentication);

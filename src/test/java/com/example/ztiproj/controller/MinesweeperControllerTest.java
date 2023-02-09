@@ -1,8 +1,7 @@
 package com.example.ztiproj.controller;
 
-import com.example.ztiproj.controller.impl.MinesweeperControllerImpl;
 import com.example.ztiproj.dto.MinesweeperDto;
-import com.example.ztiproj.service.impl.MinesweeperServiceImpl;
+import com.example.ztiproj.service.RestMinesweeperService;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -33,12 +32,12 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
  * @version 1.0
  * @since 2022-08-29
  */
-@WebMvcTest({MinesweeperControllerImpl.class})
+@WebMvcTest({MinesweeperController.class})
 class MinesweeperControllerTest {
     @Autowired
     private MockMvc mvc;
     @MockBean
-    private MinesweeperServiceImpl service;
+    private RestMinesweeperService service;
 
     @Test
     @WithMockUser
