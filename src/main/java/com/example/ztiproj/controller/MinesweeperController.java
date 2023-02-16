@@ -65,7 +65,7 @@ public class MinesweeperController {
         return ResponseEntity.ok(service.getUserRanking(username));
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping
     @Operation(
             summary = "Add result",
             description = "Method add the result to database.",
