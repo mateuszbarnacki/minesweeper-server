@@ -1,4 +1,4 @@
-package com.example.ztiproj.service;
+package com.example.ztiproj.user.service;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
