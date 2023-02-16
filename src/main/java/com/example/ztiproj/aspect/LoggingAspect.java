@@ -21,15 +21,15 @@ public class LoggingAspect {
 
     private final Logger logger = Logger.getLogger(getClass().getName());
 
-    @Pointcut("execution(* com.example.ztiproj.controller.*.*(..))")
+    @Pointcut("execution(* com.example.ztiproj.minesweeper.controller.*.*(..))")
     private void forControllerPackage() {
     }
 
-    @Pointcut("execution(* com.example.ztiproj.service.*.*(..))")
+    @Pointcut("execution(* com.example.ztiproj.minesweeper.service.*.*(..))")
     private void forServicePackage() {
     }
 
-    @Pointcut("execution(* com.example.ztiproj.repository.*.*(..))")
+    @Pointcut("execution(* com.example.ztiproj.minesweeper.repository.*.*(..))")
     private void forRepositoryPackage() {
     }
 
