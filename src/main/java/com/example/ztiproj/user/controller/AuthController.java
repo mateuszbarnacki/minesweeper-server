@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping
+@RequestMapping("/authentication")
 public class AuthController {
     private final TokenService tokenService;
     private final AuthenticationManager authenticationManager;
