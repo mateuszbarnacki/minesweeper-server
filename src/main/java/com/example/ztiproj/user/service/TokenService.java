@@ -15,4 +15,12 @@ public interface TokenService {
      * @return String Generated token.
      */
     String generateToken(Authentication authentication);
+
+    /**
+     * This method is used to check JWT token correctness.
+     *
+     * @param token JWT token.
+     * @return If token is valid returns true, otherwise false.
+     */
+    boolean checkToken(String token);
 }

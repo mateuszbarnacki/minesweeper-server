@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 
 @Service
 public class UserService implements UserDetailsService {
-    private static final Logger log = Logger.getLogger(UserService.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(UserService.class.getName());
     private final UserRepository userRepository;
     private final PasswordEncoder encoder;
 
@@ -27,16 +27,16 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findUserByUsername(username);
         if (user == null) {
-            log.log(Level.WARNING, "Could not find user with username: {0}", username);
+            LOGGER.log(Level.WARNING, "Could not find user with username: {0}", username);
             throw new UsernameNotFoundException("Given user does not exists!");
         }
         return user;
     }
 
-    public User registerUser(AuthenticationDto authenticationDto) {
+    public void registerUser(AuthenticationDto authenticationDto) {
         User user = new User();
-        user.setUsername(authenticationDto.login());
+        user.setUsername(authenticationDto.username());
         user.setPassword(encoder.encode(authenticationDto.password()));
-        return userRepository.save(user);
+        userRepository.save(user);
     }
 }

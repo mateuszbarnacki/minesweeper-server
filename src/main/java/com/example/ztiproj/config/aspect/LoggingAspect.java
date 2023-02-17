@@ -1,4 +1,4 @@
-package com.example.ztiproj.aspect;
+package com.example.ztiproj.config.aspect;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
