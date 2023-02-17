@@ -5,6 +5,7 @@ import com.example.ztiproj.user.jwt.TokenValidator;
 import com.example.ztiproj.user.validator.ValidationResult;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.stereotype.Service;
 
 import java.util.logging.Level;
@@ -19,10 +20,12 @@ import java.util.logging.Logger;
 public class RestTokenService implements TokenService {
     private static final Logger LOGGER = Logger.getLogger(RestTokenService.class.getName());
     private final JwtFactory jwtFactory;
+    private final JwtDecoder jwtDecoder;
     private final TokenValidator tokenValidator;
 
-    public RestTokenService(JwtFactory jwtService, TokenValidator tokenValidator) {
-        this.jwtFactory = jwtService;
+    public RestTokenService(JwtFactory jwtFactory, JwtDecoder jwtDecoder, TokenValidator tokenValidator) {
+        this.jwtFactory = jwtFactory;
+        this.jwtDecoder = jwtDecoder;
         this.tokenValidator = tokenValidator;
     }
 
@@ -34,7 +37,8 @@ public class RestTokenService implements TokenService {
 
     @Override
     public boolean checkToken(String token) {
-        ValidationResult validationResult = tokenValidator.validate(token);
+        Jwt jwt = jwtDecoder.decode(token);
+        ValidationResult validationResult = tokenValidator.validate(jwt);
         return isTokenValid(validationResult);
     }
 

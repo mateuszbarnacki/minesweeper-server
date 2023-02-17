@@ -7,7 +7,6 @@ import com.example.ztiproj.user.validator.ValidationResult;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.jwt.Jwt;
-import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
@@ -20,12 +19,9 @@ import static com.example.ztiproj.user.jwt.JwtFactory.JWT_ISSUER;
 @Component
 public class TokenValidator {
     private final List<JwtValidator> validators;
-    @Autowired
-    private JwtDecoder decoder;
-    @Autowired
-    private UserRepository userRepository;
 
-    public TokenValidator() {
+    @Autowired
+    public TokenValidator(UserRepository userRepository) {
         this.validators = List.of(
                 new IssuerValidator(),
                 new SubjectValidator(userRepository),
@@ -36,8 +32,7 @@ public class TokenValidator {
         this.validators = validators;
     }
 
-    public ValidationResult validate(String token) {
-        Jwt jwt = decoder.decode(token);
+    public ValidationResult validate(Jwt jwt) {
         return new ValidationResult(validators.stream()
                 .map(jwtValidator -> jwtValidator.validate(jwt))
                 .map(ValidationResult::getErrorMessage)
@@ -47,15 +42,17 @@ public class TokenValidator {
 }
 
 class IssuerValidator implements JwtValidator {
+    private static final String ISSUER_CLAIM = "iss";
+
     @Override
     public ValidationResult validate(Jwt jwt) {
-        String issuer = jwt.getIssuer().toString();
+        String issuer = jwt.getClaimAsString(ISSUER_CLAIM);
         return buildValidationResult(issuer);
     }
 
     private ValidationResult buildValidationResult(String issuer) {
         ValidationResult validationResult = new ValidationResult(Collections.emptyList());
-        if (issuer.equals(JWT_ISSUER)) {
+        if (!issuer.equals(JWT_ISSUER)) {
             validationResult = new ValidationResult(List.of("Invalid issuer!"));
         }
         return validationResult;
@@ -65,8 +62,8 @@ class IssuerValidator implements JwtValidator {
 class SubjectValidator implements JwtValidator {
     private final UserRepository userRepository;
 
-    public SubjectValidator(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public SubjectValidator(UserRepository repository) {
+        this.userRepository = repository;
     }
 
     @Override
@@ -101,6 +98,7 @@ class ExpirationTimeValidator implements JwtValidator {
     }
 
     private boolean isTokenExpired(Instant expires) {
-        return expires.compareTo(Instant.now()) >= 0;
+        Instant now = Instant.now();
+        return now.compareTo(expires) > 0;
     }
 }
