@@ -16,6 +16,11 @@ import java.util.Optional;
 
 import static com.example.ztiproj.user.jwt.JwtFactory.JWT_ISSUER;
 
+/**
+ * @author Mateusz Barnacki
+ * @version 2.0
+ * @since 2023-02-17
+ */
 @Component
 public class TokenValidator {
     private final List<JwtValidator> validators;

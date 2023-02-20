@@ -18,6 +18,11 @@ import org.springframework.security.oauth2.jwt.Jwt;
 
 import static org.mockito.ArgumentMatchers.anyString;
 
+/**
+ * @author Mateusz Barnacki
+ * @version 2.0
+ * @since 2023-02-17
+ */
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
 class TokenValidatorTest {

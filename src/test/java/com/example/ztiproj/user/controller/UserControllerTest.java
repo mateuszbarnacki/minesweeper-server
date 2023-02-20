@@ -22,6 +22,11 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 
+/**
+ * @author Mateusz Barnacki
+ * @version 2.0
+ * @since 2023-02-17
+ */
 @WebMvcTest({UserController.class})
 class UserControllerTest {
     @Autowired

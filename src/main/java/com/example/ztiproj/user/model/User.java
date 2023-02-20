@@ -10,6 +10,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Collections;
 
+/**
+ * @author Mateusz Barnacki
+ * @version 2.0
+ * @since 2023-02-16
+ */
 @Document
 public class User implements UserDetails {
     @MongoId

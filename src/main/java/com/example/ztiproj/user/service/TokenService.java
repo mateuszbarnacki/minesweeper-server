@@ -4,7 +4,7 @@ import org.springframework.security.core.Authentication;
 
 /**
  * @author Mateusz Barnacki
- * @version 1.0
+ * @version 2.0
  * @since 2023-02-09
  */
 public interface TokenService {

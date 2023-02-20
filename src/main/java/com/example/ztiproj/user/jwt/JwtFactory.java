@@ -12,6 +12,11 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.stream.Collectors;
 
+/**
+ * @author Mateusz Barnacki
+ * @version 2.0
+ * @since 2023-02-17
+ */
 @Component
 public class JwtFactory {
     private final JwtEncoder jwtEncoder;

@@ -14,6 +14,11 @@ import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 
+/**
+ * @author Mateusz Barnacki
+ * @version 2.0
+ * @since 2023-02-17
+ */
 @SpringBootTest
 class ExpirationTimeValidatorTest {
     private final ExpirationTimeValidator expirationTimeValidator;

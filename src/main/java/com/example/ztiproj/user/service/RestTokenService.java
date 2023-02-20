@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 
 /**
  * @author Mateusz Barnacki
- * @version 1.0
+ * @version 2.0
  * @since 2023-02-08
  */
 @Service

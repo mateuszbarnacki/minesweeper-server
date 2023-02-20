@@ -12,6 +12,11 @@ import org.springframework.stereotype.Service;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * @author Mateusz Barnacki
+ * @version 2.0
+ * @since 2023-02-16
+ */
 @Service
 public class UserService implements UserDetailsService {
     private static final Logger LOGGER = Logger.getLogger(UserService.class.getName());

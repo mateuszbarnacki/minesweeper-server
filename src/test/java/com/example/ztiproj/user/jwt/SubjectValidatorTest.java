@@ -21,6 +21,11 @@ import java.time.temporal.ChronoUnit;
 
 import static org.mockito.ArgumentMatchers.anyString;
 
+/**
+ * @author Mateusz Barnacki
+ * @version 2.0
+ * @since 2023-02-17
+ */
 @SpringBootTest
 class SubjectValidatorTest {
     @InjectMocks
