@@ -1,6 +1,6 @@
-package com.example.ztiproj.minesweeper.exception;
+package com.example.ztiproj.config.exception;
 
-import com.example.ztiproj.minesweeper.exception.handler.RestError;
+import com.example.ztiproj.config.exception.handler.RestError;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,5 +18,10 @@ public class DummyErrorController {
     @GetMapping("/minesweeper")
     public ResponseEntity<RestError> dummyMinesweeperController() {
         throw new InvalidMinesweeperResultException("Null dto provided!");
+    }
+
+    @GetMapping("/user")
+    public ResponseEntity<RestError> dummyUserController() {
+        throw new ExistentUserException("test");
     }
 }

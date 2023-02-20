@@ -1,4 +1,4 @@
-package com.example.ztiproj.minesweeper.exception.handler;
+package com.example.ztiproj.config.exception.handler;
 
 import jakarta.validation.constraints.NotBlank;
 

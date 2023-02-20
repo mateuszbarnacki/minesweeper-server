@@ -1,7 +1,8 @@
-package com.example.ztiproj.minesweeper.exception.handler;
+package com.example.ztiproj.config.exception.handler;
 
-import com.example.ztiproj.minesweeper.exception.InvalidMinesweeperResultException;
-import com.example.ztiproj.minesweeper.exception.ZtiProjException;
+import com.example.ztiproj.config.exception.ExistentUserException;
+import com.example.ztiproj.config.exception.InvalidMinesweeperResultException;
+import com.example.ztiproj.config.exception.ZtiProjException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -20,6 +21,12 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     @ExceptionHandler({InvalidMinesweeperResultException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<RestError> handleInvalidMinesweeperResultException(InvalidMinesweeperResultException e) {
+        return new ResponseEntity<>(buildErrorMessage(e), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler({ExistentUserException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<RestError> handleExistentUserException(ExistentUserException e) {
         return new ResponseEntity<>(buildErrorMessage(e), HttpStatus.BAD_REQUEST);
     }
 

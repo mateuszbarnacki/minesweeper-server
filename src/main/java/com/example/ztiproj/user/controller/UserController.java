@@ -1,7 +1,7 @@
 package com.example.ztiproj.user.controller;
 
 import com.example.ztiproj.user.dto.AuthenticationDto;
-import com.example.ztiproj.user.service.UserService;
+import com.example.ztiproj.user.service.RestUserService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,16 +18,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-    private final UserService userService;
+    private final RestUserService restUserService;
 
-    public UserController(UserService service) {
-        this.userService = service;
+    public UserController(RestUserService service) {
+        this.restUserService = service;
     }
 
     @PostMapping
     @Operation(hidden = true)
     public ResponseEntity<Void> registerUser(@RequestBody AuthenticationDto authenticationDto) {
-        userService.registerUser(authenticationDto);
+        restUserService.registerUser(authenticationDto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }

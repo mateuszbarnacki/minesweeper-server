@@ -1,4 +1,4 @@
-package com.example.ztiproj.minesweeper.exception.handler;
+package com.example.ztiproj.config.exception.handler;
 
 /**
  * @author Mateusz Barnacki

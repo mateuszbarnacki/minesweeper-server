@@ -1,6 +1,6 @@
-package com.example.ztiproj.minesweeper.exception;
+package com.example.ztiproj.config.exception;
 
-import com.example.ztiproj.minesweeper.exception.handler.RestResponseEntityExceptionHandler;
+import com.example.ztiproj.config.exception.handler.RestResponseEntityExceptionHandler;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -27,6 +27,15 @@ class ExceptionHandlingIntegrationTest {
         mvc.perform(MockMvcRequestBuilders.get("/error/minesweeper"))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("Null dto provided!"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.status").value("BAD_REQUEST"));
+    }
+
+    @Test
+    @WithMockUser
+    void shouldReturnUserBadRequest() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/error/user"))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("User with username <test> already exists!"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.status").value("BAD_REQUEST"));
     }
 }

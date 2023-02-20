@@ -61,8 +61,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/authentication/auth",
-                                "/authentication/check-token").permitAll()
-                        .requestMatchers("/user").permitAll()
+                                "/authentication/check-token",
+                                "/user").permitAll()
                         .anyRequest().authenticated())
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

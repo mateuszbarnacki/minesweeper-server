@@ -1,7 +1,7 @@
-package com.example.ztiproj.minesweeper.exception;
+package com.example.ztiproj.config.exception;
 
 import com.example.ztiproj.minesweeper.common.Labels;
-import com.example.ztiproj.minesweeper.exception.handler.ErrorCode;
+import com.example.ztiproj.config.exception.handler.ErrorCode;
 
 /**
  * @author Mateusz Barnacki

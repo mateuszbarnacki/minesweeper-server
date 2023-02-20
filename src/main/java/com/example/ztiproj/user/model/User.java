@@ -18,19 +18,8 @@ import java.util.Collections;
 @Document
 public class User implements UserDetails {
     @MongoId
-    private String id;
     private String username;
     private String password;
-
-    public User() {}
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     @Override
     public String getUsername() {

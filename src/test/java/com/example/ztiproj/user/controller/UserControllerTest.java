@@ -1,7 +1,7 @@
 package com.example.ztiproj.user.controller;
 
 import com.example.ztiproj.user.dto.AuthenticationDto;
-import com.example.ztiproj.user.service.UserService;
+import com.example.ztiproj.user.service.RestUserService;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -32,7 +32,7 @@ class UserControllerTest {
     @Autowired
     private MockMvc mvc;
     @MockBean
-    private UserService userService;
+    private RestUserService restUserService;
 
     @Test
     @WithMockUser
@@ -55,6 +55,6 @@ class UserControllerTest {
         mvc.perform(requestBuilder)
                 .andExpect(MockMvcResultMatchers.status().isCreated());
 
-        verify(userService).registerUser(any(AuthenticationDto.class));
+        verify(restUserService).registerUser(any(AuthenticationDto.class));
     }
 }
